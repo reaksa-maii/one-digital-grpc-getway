@@ -1,9 +1,6 @@
-package main
-import "fmt"
+package onegrpcgetway
 import "log"
-func main() {
-	fmt.Println("Hello, Gateway One App!")
-}
+
 func LogError(err error) {
 	if err != nil {
 		log.Printf("Error: %v", err)
