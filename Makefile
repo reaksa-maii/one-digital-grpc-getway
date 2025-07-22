@@ -1,5 +1,5 @@
 clean:
 	rm proto/helloworld/*.go
 
-generate:
-	buf generate proto/helloworld/*.proto
+generate-v1:
+	buf generate proto/v1/*.proto
