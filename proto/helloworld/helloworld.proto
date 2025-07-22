@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package helloworld.v1;
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/helloworld";
+
+service GreeterService {
+  rpc SayHello(GreeterServiceSayHelloRequest) returns (GreeterServiceSayHelloResponse){}
+}
+
+message GreeterServiceSayHelloRequest {
+  string name = 1;
+}
+
+message GreeterServiceSayHelloResponse {
+  string message = 1;
+}
