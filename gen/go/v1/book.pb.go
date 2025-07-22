@@ -4,9 +4,10 @@
 // 	protoc        (unknown)
 // source: v1/book.proto
 
-package helloworld
+package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -113,13 +114,13 @@ var File_v1_book_proto protoreflect.FileDescriptor
 
 const file_v1_book_proto_rawDesc = "" +
 	"\n" +
-	"\rv1/book.proto\x12\rhelloworld.v1\"3\n" +
+	"\rv1/book.proto\x12\abook.v1\x1a\x1cgoogle/api/annotations.proto\"3\n" +
 	"\x1dGreeterServiceSayHelloRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\":\n" +
 	"\x1eGreeterServiceSayHelloResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2{\n" +
-	"\x0eGreeterService\x12i\n" +
-	"\bSayHello\x12,.helloworld.v1.GreeterServiceSayHelloRequest\x1a-.helloworld.v1.GreeterServiceSayHelloResponse\"\x00B;Z9github.com/reaksa-maii/one_digital_grpc_getway/helloworldb\x06proto3"
+	"\amessage\x18\x01 \x01(\tR\amessage2\x82\x01\n" +
+	"\x0eGreeterService\x12p\n" +
+	"\bSayHello\x12&.book.v1.GreeterServiceSayHelloRequest\x1a'.book.v1.GreeterServiceSayHelloResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/v1/bookB8Z6github.com/reaksa-maii/one_digital_grpc_getway/book/v1b\x06proto3"
 
 var (
 	file_v1_book_proto_rawDescOnce sync.Once
@@ -135,12 +136,12 @@ func file_v1_book_proto_rawDescGZIP() []byte {
 
 var file_v1_book_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_v1_book_proto_goTypes = []any{
-	(*GreeterServiceSayHelloRequest)(nil),  // 0: helloworld.v1.GreeterServiceSayHelloRequest
-	(*GreeterServiceSayHelloResponse)(nil), // 1: helloworld.v1.GreeterServiceSayHelloResponse
+	(*GreeterServiceSayHelloRequest)(nil),  // 0: book.v1.GreeterServiceSayHelloRequest
+	(*GreeterServiceSayHelloResponse)(nil), // 1: book.v1.GreeterServiceSayHelloResponse
 }
 var file_v1_book_proto_depIdxs = []int32{
-	0, // 0: helloworld.v1.GreeterService.SayHello:input_type -> helloworld.v1.GreeterServiceSayHelloRequest
-	1, // 1: helloworld.v1.GreeterService.SayHello:output_type -> helloworld.v1.GreeterServiceSayHelloResponse
+	0, // 0: book.v1.GreeterService.SayHello:input_type -> book.v1.GreeterServiceSayHelloRequest
+	1, // 1: book.v1.GreeterService.SayHello:output_type -> book.v1.GreeterServiceSayHelloResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
