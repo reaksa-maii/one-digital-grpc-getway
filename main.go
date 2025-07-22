@@ -8,9 +8,9 @@ import (
 	"net/http"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/book/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/book/v1"
 )
 
 // Define the server struct, which implements the pb.UnimplementedGreeterServiceServer interface
