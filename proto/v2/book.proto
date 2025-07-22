@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package helloworld.v1;
+package helloworld.v2;
 
 option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/helloworld";
 
