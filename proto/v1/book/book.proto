@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package v1.book;
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/v1";
+
+service GreeterService {
+  rpc SayHello(GreeterServiceSayHelloRequest) returns (GreeterServiceSayHelloResponse){
+    option (google.api.http) = {
+      post: "/v1/book"
+      body: "*"
+    };
+  }
+}
+
+message GreeterServiceSayHelloRequest {
+  string name = 1;
+}
+
+message GreeterServiceSayHelloResponse {
+  string message = 1;
+}

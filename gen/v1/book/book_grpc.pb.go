@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: v1/book.proto
+// source: v1/book/book.proto
 
 package v1
 
@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	GreeterService_SayHello_FullMethodName = "/book.v1.GreeterService/SayHello"
+	GreeterService_SayHello_FullMethodName = "/v1.book.GreeterService/SayHello"
 )
 
 // GreeterServiceClient is the client API for GreeterService service.
@@ -108,7 +108,7 @@ func _GreeterService_SayHello_Handler(srv interface{}, ctx context.Context, dec 
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var GreeterService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "book.v1.GreeterService",
+	ServiceName: "v1.book.GreeterService",
 	HandlerType: (*GreeterServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -117,5 +117,5 @@ var GreeterService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "v1/book.proto",
+	Metadata: "v1/book/book.proto",
 }
