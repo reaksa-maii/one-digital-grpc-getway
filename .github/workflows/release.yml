@@ -1,4 +1,4 @@
-name: GoCI
+name: Build Go CI
 
 on:
   push:
@@ -31,13 +31,3 @@ jobs:
       - name: Version
         run: |
           go version
-
-  install:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - name: configure
-        run: ./configure
-      - name: Set up Make
-        run: |
-          make -version
