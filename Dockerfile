@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=builder /app/myapp /app/myapp
 
 # Expose the port your application listens on
-EXPOSE 8080
+EXPOSE 8081
 
 # Command to run when the container starts
 CMD ["/app/myapp"]

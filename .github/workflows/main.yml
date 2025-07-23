@@ -8,7 +8,7 @@ on:
       - 'prod-v*'
 
 env:
-  REGISTRY: reaksa7236/ets-evaluate-admin
+  REGISTRY: reaksa7236/getway-grpc
 
 jobs:
   build-and-push:
