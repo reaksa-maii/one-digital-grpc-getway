@@ -2,11 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        (unknown)
-// source: v2/book.proto
+// source: v1/podcast/podcast.proto
 
-package helloworld
+package v1
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -30,7 +31,7 @@ type GreeterServiceSayHelloRequest struct {
 
 func (x *GreeterServiceSayHelloRequest) Reset() {
 	*x = GreeterServiceSayHelloRequest{}
-	mi := &file_v2_book_proto_msgTypes[0]
+	mi := &file_v1_podcast_podcast_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -42,7 +43,7 @@ func (x *GreeterServiceSayHelloRequest) String() string {
 func (*GreeterServiceSayHelloRequest) ProtoMessage() {}
 
 func (x *GreeterServiceSayHelloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_v2_book_proto_msgTypes[0]
+	mi := &file_v1_podcast_podcast_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -55,7 +56,7 @@ func (x *GreeterServiceSayHelloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GreeterServiceSayHelloRequest.ProtoReflect.Descriptor instead.
 func (*GreeterServiceSayHelloRequest) Descriptor() ([]byte, []int) {
-	return file_v2_book_proto_rawDescGZIP(), []int{0}
+	return file_v1_podcast_podcast_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *GreeterServiceSayHelloRequest) GetName() string {
@@ -74,7 +75,7 @@ type GreeterServiceSayHelloResponse struct {
 
 func (x *GreeterServiceSayHelloResponse) Reset() {
 	*x = GreeterServiceSayHelloResponse{}
-	mi := &file_v2_book_proto_msgTypes[1]
+	mi := &file_v1_podcast_podcast_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -86,7 +87,7 @@ func (x *GreeterServiceSayHelloResponse) String() string {
 func (*GreeterServiceSayHelloResponse) ProtoMessage() {}
 
 func (x *GreeterServiceSayHelloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_v2_book_proto_msgTypes[1]
+	mi := &file_v1_podcast_podcast_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -99,7 +100,7 @@ func (x *GreeterServiceSayHelloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GreeterServiceSayHelloResponse.ProtoReflect.Descriptor instead.
 func (*GreeterServiceSayHelloResponse) Descriptor() ([]byte, []int) {
-	return file_v2_book_proto_rawDescGZIP(), []int{1}
+	return file_v1_podcast_podcast_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GreeterServiceSayHelloResponse) GetMessage() string {
@@ -109,38 +110,39 @@ func (x *GreeterServiceSayHelloResponse) GetMessage() string {
 	return ""
 }
 
-var File_v2_book_proto protoreflect.FileDescriptor
+var File_v1_podcast_podcast_proto protoreflect.FileDescriptor
 
-const file_v2_book_proto_rawDesc = "" +
+const file_v1_podcast_podcast_proto_rawDesc = "" +
 	"\n" +
-	"\rv2/book.proto\x12\rhelloworld.v2\"3\n" +
+	"\x18v1/podcast/podcast.proto\x12\n" +
+	"v1.podcast\x1a\x1cgoogle/api/annotations.proto\"3\n" +
 	"\x1dGreeterServiceSayHelloRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\":\n" +
 	"\x1eGreeterServiceSayHelloResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2{\n" +
-	"\x0eGreeterService\x12i\n" +
-	"\bSayHello\x12,.helloworld.v2.GreeterServiceSayHelloRequest\x1a-.helloworld.v2.GreeterServiceSayHelloResponse\"\x00B;Z9github.com/reaksa-maii/one_digital_grpc_getway/helloworldb\x06proto3"
+	"\amessage\x18\x01 \x01(\tR\amessage2\x8b\x01\n" +
+	"\x0eGreeterService\x12y\n" +
+	"\bSayHello\x12).v1.podcast.GreeterServiceSayHelloRequest\x1a*.v1.podcast.GreeterServiceSayHelloResponse\"\x16\x82\xd3\xe4\x93\x02\x10:\x01*\"\v/v1/podcastB3Z1github.com/reaksa-maii/one_digital_grpc_getway/v1b\x06proto3"
 
 var (
-	file_v2_book_proto_rawDescOnce sync.Once
-	file_v2_book_proto_rawDescData []byte
+	file_v1_podcast_podcast_proto_rawDescOnce sync.Once
+	file_v1_podcast_podcast_proto_rawDescData []byte
 )
 
-func file_v2_book_proto_rawDescGZIP() []byte {
-	file_v2_book_proto_rawDescOnce.Do(func() {
-		file_v2_book_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_v2_book_proto_rawDesc), len(file_v2_book_proto_rawDesc)))
+func file_v1_podcast_podcast_proto_rawDescGZIP() []byte {
+	file_v1_podcast_podcast_proto_rawDescOnce.Do(func() {
+		file_v1_podcast_podcast_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_v1_podcast_podcast_proto_rawDesc), len(file_v1_podcast_podcast_proto_rawDesc)))
 	})
-	return file_v2_book_proto_rawDescData
+	return file_v1_podcast_podcast_proto_rawDescData
 }
 
-var file_v2_book_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_v2_book_proto_goTypes = []any{
-	(*GreeterServiceSayHelloRequest)(nil),  // 0: helloworld.v2.GreeterServiceSayHelloRequest
-	(*GreeterServiceSayHelloResponse)(nil), // 1: helloworld.v2.GreeterServiceSayHelloResponse
+var file_v1_podcast_podcast_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_v1_podcast_podcast_proto_goTypes = []any{
+	(*GreeterServiceSayHelloRequest)(nil),  // 0: v1.podcast.GreeterServiceSayHelloRequest
+	(*GreeterServiceSayHelloResponse)(nil), // 1: v1.podcast.GreeterServiceSayHelloResponse
 }
-var file_v2_book_proto_depIdxs = []int32{
-	0, // 0: helloworld.v2.GreeterService.SayHello:input_type -> helloworld.v2.GreeterServiceSayHelloRequest
-	1, // 1: helloworld.v2.GreeterService.SayHello:output_type -> helloworld.v2.GreeterServiceSayHelloResponse
+var file_v1_podcast_podcast_proto_depIdxs = []int32{
+	0, // 0: v1.podcast.GreeterService.SayHello:input_type -> v1.podcast.GreeterServiceSayHelloRequest
+	1, // 1: v1.podcast.GreeterService.SayHello:output_type -> v1.podcast.GreeterServiceSayHelloResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -148,26 +150,26 @@ var file_v2_book_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_v2_book_proto_init() }
-func file_v2_book_proto_init() {
-	if File_v2_book_proto != nil {
+func init() { file_v1_podcast_podcast_proto_init() }
+func file_v1_podcast_podcast_proto_init() {
+	if File_v1_podcast_podcast_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v2_book_proto_rawDesc), len(file_v2_book_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_v1_podcast_podcast_proto_rawDesc), len(file_v1_podcast_podcast_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_v2_book_proto_goTypes,
-		DependencyIndexes: file_v2_book_proto_depIdxs,
-		MessageInfos:      file_v2_book_proto_msgTypes,
+		GoTypes:           file_v1_podcast_podcast_proto_goTypes,
+		DependencyIndexes: file_v1_podcast_podcast_proto_depIdxs,
+		MessageInfos:      file_v1_podcast_podcast_proto_msgTypes,
 	}.Build()
-	File_v2_book_proto = out.File
-	file_v2_book_proto_goTypes = nil
-	file_v2_book_proto_depIdxs = nil
+	File_v1_podcast_podcast_proto = out.File
+	file_v1_podcast_podcast_proto_goTypes = nil
+	file_v1_podcast_podcast_proto_depIdxs = nil
 }
