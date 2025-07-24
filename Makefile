@@ -1,17 +1,17 @@
-clean:
-	rm proto/helloworld/*.go
+clean-book-v1:
+	rm proto/book/v1/*.go
 
-generate-v1:
-	buf generate proto/book/v1/*.proto
-
-generate-v2:
-	buf generate proto/v2/book/*.proto
+clean-book-v2:
+	rm proto/book/v2/*.go
 
 book-v1:
-	buf generate proto/v1/book/*.proto
+	buf generate proto/book/v1/*.proto
+
+book-v2:
+	buf generate proto/book/v2/*.proto
 
 podcast-v1:
-	buf generate proto/v1/podcast/*.proto
+	buf generate proto/podcast/v1/*.proto
 
 podcast-v2:
-	buf generate proto/v2/podcast/*.proto
+	buf generate proto/podcast/v2/*.proto
