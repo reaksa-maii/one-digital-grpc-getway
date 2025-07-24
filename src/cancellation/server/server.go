@@ -8,6 +8,7 @@ import (
 	"net"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 
 	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/echo/v1"
 )
@@ -36,12 +37,20 @@ func (s *server) BidirectionalStreamingEcho(stream pb.Echo_BidirectionalStreamin
 func main() {
 	flag.Parse()
 
-	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
+	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
+
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	fmt.Printf("server listening at port %v\n", lis.Addr())
+
 	s := grpc.NewServer()
+
 	pb.RegisterEchoServer(s, &server{})
-	s.Serve(lis)
+
+	reflection.Register(s)
+
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to serve: %v", err)
+	}
 }
