@@ -7,10 +7,10 @@ import (
 	"log"
 	"time"
 
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/echo/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/echo/v1"
 	"google.golang.org/grpc/status"
 )
 

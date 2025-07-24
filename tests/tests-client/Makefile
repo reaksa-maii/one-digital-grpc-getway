@@ -2,7 +2,7 @@ test-local:
 	grpcurl -plaintext -d '{"name": "your name"}' localhost:8080 book.v1.GreeterService/SayHello
 
 health:
-	grpcdebug localhost:8080 health
+	grpcdebug localhost:50051 health
 
 health-service:
 	grpcdebug localhost:50051 health helloworld.Greeter
