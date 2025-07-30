@@ -18,3 +18,5 @@ podcast-v2:
 
 echo-v1:
 	buf generate proto/echo/v1/*.proto
+echo-v2:
+	buf generate proto/echo/v2/*.proto

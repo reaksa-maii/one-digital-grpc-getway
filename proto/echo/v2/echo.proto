@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/echo";
+
+package echo.v2;
+
+service Echo {
+	rpc EchoMessage (EchoRequest) returns (EchoReply) {
+		option (google.api.http) = {
+      		post: "/v2/echo"
+      		body: "*"
+		};
+	}
+}
+
+message EchoRequest {
+	string message = 1;
+}
+
+message EchoReply {
+	string message = 1;
+}
