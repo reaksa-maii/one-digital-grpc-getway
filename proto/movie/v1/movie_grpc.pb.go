@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             (unknown)
-// source: movies/v1/movie.proto
+// source: movie/v1/movie.proto
 
 package movie
 
@@ -260,5 +260,5 @@ var Movie_ServiceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
-	Metadata: "movies/v1/movie.proto",
+	Metadata: "movie/v1/movie.proto",
 }
