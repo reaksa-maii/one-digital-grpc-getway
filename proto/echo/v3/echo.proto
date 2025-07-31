@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/echo";
+
+package echo.v3;
+
+service Echo {
+	rpc EchoMessage (EchoRequest) returns (EchoResponse) {
+		option (google.api.http) = {
+      		post: "/v2/echo"
+      		body: "*"
+		};
+	}
+    rpc UnaryEcho(EchoRequest) returns (EchoResponse) {}
+    rpc ServerStreamingEcho(EchoRequest) returns (stream EchoResponse) {}
+    rpc ClientStreamingEcho(stream EchoRequest) returns (EchoResponse) {}
+    rpc BidirectionalStreamingEcho(stream EchoRequest) returns (stream EchoResponse) {}
+}
+
+message EchoRequest {
+    
+	string movie = 1;
+}
+
+message EchoResponse {
+	string movie = 1;
+}

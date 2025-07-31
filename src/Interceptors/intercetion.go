@@ -1,4 +1,4 @@
-package interception
+package main
 
 import (
 	"context"

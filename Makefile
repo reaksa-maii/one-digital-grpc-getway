@@ -20,3 +20,6 @@ echo-v1:
 	buf generate proto/echo/v1/*.proto
 echo-v2:
 	buf generate proto/echo/v2/*.proto
+
+echo-v3:
+	buf generate proto/echo/v3/*.proto
