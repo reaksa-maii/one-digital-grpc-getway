@@ -9,6 +9,9 @@ book-v1:
 
 book-v2:
 	buf generate proto/book/v2/*.proto
+	
+book-3:
+	buf generate proto/book/v3/*.proto
 
 podcast-v1:
 	buf generate proto/podcast/v1/*.proto

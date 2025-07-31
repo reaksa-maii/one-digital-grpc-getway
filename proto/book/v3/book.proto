@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/book";
+
+package book.v3;
+
+service Book{
+	rpc BookMessage (BookRequest) returns (BookResponse) {
+		option (google.api.http) = {
+      		post: "/v3/book"
+      		body: "*"
+		};
+	}
+    rpc UnaryBook(BookRequest) returns (BookResponse) {}
+    rpc ServerStreamingBook(BookRequest) returns (stream BookResponse) {}
+    rpc ClientStreamingBook(stream BookRequest) returns (BookResponse) {}
+    rpc BidirectionalStreamingBook(stream BookRequest) returns (stream BookResponse) {}
+}
+
+message BookRequest {
+    int32 id = 1;
+	string book = 2;
+    string title = 3;
+    string category = 4;
+    string description = 5;
+}
+
+message BookResponse {
+    int32 id = 1;
+	string book = 2;
+    string title = 3;
+    string category = 4;
+    string description = 5;
+}
