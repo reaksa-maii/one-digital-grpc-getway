@@ -208,10 +208,11 @@ const file_movie_v1_movie_proto_rawDesc = "" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
-	"\bduration\x18\x06 \x01(\x01R\bduration2\x8d\x03\n" +
-	"\x05Movie\x12T\n" +
-	"\vEchoMessage\x12\x16.movie.v1.MovieRequest\x1a\x17.movie.v1.MovieResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/movie\x12>\n" +
-	"\tUnaryEcho\x12\x16.movie.v1.MovieRequest\x1a\x17.movie.v1.MovieResponse\"\x00\x12K\n" +
+	"\bduration\x18\x06 \x01(\x01R\bduration2\x8f\x03\n" +
+	"\x05Movie\x12U\n" +
+	"\fMovieMessage\x12\x16.movie.v1.MovieRequest\x1a\x17.movie.v1.MovieResponse\"\x14\x82\xd3\xe4\x93\x02\x0e:\x01*\"\t/v1/movie\x12?\n" +
+	"\n" +
+	"UnaryMovie\x12\x16.movie.v1.MovieRequest\x1a\x17.movie.v1.MovieResponse\"\x00\x12K\n" +
 	"\x14ServerStreamingMovie\x12\x16.movie.v1.MovieRequest\x1a\x17.movie.v1.MovieResponse\"\x000\x01\x12K\n" +
 	"\x14ClientStreamingMovie\x12\x16.movie.v1.MovieRequest\x1a\x17.movie.v1.MovieResponse\"\x00(\x01\x12T\n" +
 	"\x1bBidirectionalStreamingMovie\x12\x16.movie.v1.MovieRequest\x1a\x17.movie.v1.MovieResponse\"\x00(\x010\x01B6Z4github.com/reaksa-maii/one_digital_grpc_getway/movieb\x06proto3"
@@ -234,13 +235,13 @@ var file_movie_v1_movie_proto_goTypes = []any{
 	(*MovieResponse)(nil), // 1: movie.v1.MovieResponse
 }
 var file_movie_v1_movie_proto_depIdxs = []int32{
-	0, // 0: movie.v1.Movie.EchoMessage:input_type -> movie.v1.MovieRequest
-	0, // 1: movie.v1.Movie.UnaryEcho:input_type -> movie.v1.MovieRequest
+	0, // 0: movie.v1.Movie.MovieMessage:input_type -> movie.v1.MovieRequest
+	0, // 1: movie.v1.Movie.UnaryMovie:input_type -> movie.v1.MovieRequest
 	0, // 2: movie.v1.Movie.ServerStreamingMovie:input_type -> movie.v1.MovieRequest
 	0, // 3: movie.v1.Movie.ClientStreamingMovie:input_type -> movie.v1.MovieRequest
 	0, // 4: movie.v1.Movie.BidirectionalStreamingMovie:input_type -> movie.v1.MovieRequest
-	1, // 5: movie.v1.Movie.EchoMessage:output_type -> movie.v1.MovieResponse
-	1, // 6: movie.v1.Movie.UnaryEcho:output_type -> movie.v1.MovieResponse
+	1, // 5: movie.v1.Movie.MovieMessage:output_type -> movie.v1.MovieResponse
+	1, // 6: movie.v1.Movie.UnaryMovie:output_type -> movie.v1.MovieResponse
 	1, // 7: movie.v1.Movie.ServerStreamingMovie:output_type -> movie.v1.MovieResponse
 	1, // 8: movie.v1.Movie.ClientStreamingMovie:output_type -> movie.v1.MovieResponse
 	1, // 9: movie.v1.Movie.BidirectionalStreamingMovie:output_type -> movie.v1.MovieResponse

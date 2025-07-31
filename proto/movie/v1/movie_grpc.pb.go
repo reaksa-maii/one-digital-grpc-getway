@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	Movie_EchoMessage_FullMethodName                 = "/movie.v1.Movie/EchoMessage"
-	Movie_UnaryEcho_FullMethodName                   = "/movie.v1.Movie/UnaryEcho"
+	Movie_MovieMessage_FullMethodName                = "/movie.v1.Movie/MovieMessage"
+	Movie_UnaryMovie_FullMethodName                  = "/movie.v1.Movie/UnaryMovie"
 	Movie_ServerStreamingMovie_FullMethodName        = "/movie.v1.Movie/ServerStreamingMovie"
 	Movie_ClientStreamingMovie_FullMethodName        = "/movie.v1.Movie/ClientStreamingMovie"
 	Movie_BidirectionalStreamingMovie_FullMethodName = "/movie.v1.Movie/BidirectionalStreamingMovie"
@@ -30,8 +30,8 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MovieClient interface {
-	EchoMessage(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (*MovieResponse, error)
-	UnaryEcho(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (*MovieResponse, error)
+	MovieMessage(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (*MovieResponse, error)
+	UnaryMovie(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (*MovieResponse, error)
 	ServerStreamingMovie(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[MovieResponse], error)
 	ClientStreamingMovie(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[MovieRequest, MovieResponse], error)
 	BidirectionalStreamingMovie(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[MovieRequest, MovieResponse], error)
@@ -45,20 +45,20 @@ func NewMovieClient(cc grpc.ClientConnInterface) MovieClient {
 	return &movieClient{cc}
 }
 
-func (c *movieClient) EchoMessage(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (*MovieResponse, error) {
+func (c *movieClient) MovieMessage(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (*MovieResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MovieResponse)
-	err := c.cc.Invoke(ctx, Movie_EchoMessage_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Movie_MovieMessage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *movieClient) UnaryEcho(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (*MovieResponse, error) {
+func (c *movieClient) UnaryMovie(ctx context.Context, in *MovieRequest, opts ...grpc.CallOption) (*MovieResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MovieResponse)
-	err := c.cc.Invoke(ctx, Movie_UnaryEcho_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Movie_UnaryMovie_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -114,8 +114,8 @@ type Movie_BidirectionalStreamingMovieClient = grpc.BidiStreamingClient[MovieReq
 // All implementations must embed UnimplementedMovieServer
 // for forward compatibility.
 type MovieServer interface {
-	EchoMessage(context.Context, *MovieRequest) (*MovieResponse, error)
-	UnaryEcho(context.Context, *MovieRequest) (*MovieResponse, error)
+	MovieMessage(context.Context, *MovieRequest) (*MovieResponse, error)
+	UnaryMovie(context.Context, *MovieRequest) (*MovieResponse, error)
 	ServerStreamingMovie(*MovieRequest, grpc.ServerStreamingServer[MovieResponse]) error
 	ClientStreamingMovie(grpc.ClientStreamingServer[MovieRequest, MovieResponse]) error
 	BidirectionalStreamingMovie(grpc.BidiStreamingServer[MovieRequest, MovieResponse]) error
@@ -129,11 +129,11 @@ type MovieServer interface {
 // pointer dereference when methods are called.
 type UnimplementedMovieServer struct{}
 
-func (UnimplementedMovieServer) EchoMessage(context.Context, *MovieRequest) (*MovieResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method EchoMessage not implemented")
+func (UnimplementedMovieServer) MovieMessage(context.Context, *MovieRequest) (*MovieResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MovieMessage not implemented")
 }
-func (UnimplementedMovieServer) UnaryEcho(context.Context, *MovieRequest) (*MovieResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UnaryEcho not implemented")
+func (UnimplementedMovieServer) UnaryMovie(context.Context, *MovieRequest) (*MovieResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnaryMovie not implemented")
 }
 func (UnimplementedMovieServer) ServerStreamingMovie(*MovieRequest, grpc.ServerStreamingServer[MovieResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method ServerStreamingMovie not implemented")
@@ -165,38 +165,38 @@ func RegisterMovieServer(s grpc.ServiceRegistrar, srv MovieServer) {
 	s.RegisterService(&Movie_ServiceDesc, srv)
 }
 
-func _Movie_EchoMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Movie_MovieMessage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MovieRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MovieServer).EchoMessage(ctx, in)
+		return srv.(MovieServer).MovieMessage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Movie_EchoMessage_FullMethodName,
+		FullMethod: Movie_MovieMessage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MovieServer).EchoMessage(ctx, req.(*MovieRequest))
+		return srv.(MovieServer).MovieMessage(ctx, req.(*MovieRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Movie_UnaryEcho_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Movie_UnaryMovie_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MovieRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MovieServer).UnaryEcho(ctx, in)
+		return srv.(MovieServer).UnaryMovie(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Movie_UnaryEcho_FullMethodName,
+		FullMethod: Movie_UnaryMovie_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MovieServer).UnaryEcho(ctx, req.(*MovieRequest))
+		return srv.(MovieServer).UnaryMovie(ctx, req.(*MovieRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -234,12 +234,12 @@ var Movie_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*MovieServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "EchoMessage",
-			Handler:    _Movie_EchoMessage_Handler,
+			MethodName: "MovieMessage",
+			Handler:    _Movie_MovieMessage_Handler,
 		},
 		{
-			MethodName: "UnaryEcho",
-			Handler:    _Movie_UnaryEcho_Handler,
+			MethodName: "UnaryMovie",
+			Handler:    _Movie_UnaryMovie_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

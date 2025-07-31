@@ -20,6 +20,3 @@ var (
 	errMassaeg = status.Errorf(codes.InvalidArgument, "missing matada")
 	errInvalideToken = status.Errorf(codes.Unauthenticated, "invalide token")
 )
-type server struct {
-	pb.
-}
