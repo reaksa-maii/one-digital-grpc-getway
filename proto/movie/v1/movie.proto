@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/movie";
+
+package movie.v1;
+
+service Movie {
+	rpc MovieMessage (MovieRequest) returns (MovieResponse) {
+		option (google.api.http) = {
+      		post: "/v1/movie"
+      		body: "*"
+		};
+	}
+    rpc UnaryMovie(MovieRequest) returns (MovieResponse) {}
+    rpc ServerStreamingMovie(MovieRequest) returns (stream MovieResponse) {}
+    rpc ClientStreamingMovie(stream MovieRequest) returns (MovieResponse) {}
+    rpc BidirectionalStreamingMovie(stream MovieRequest) returns (stream MovieResponse) {}
+}
+
+message MovieRequest {
+    int32 id = 1;
+	string movie = 2;
+    string title = 3;
+    string category = 4;
+    string description = 5;
+    double  duration = 6;
+}
+
+message MovieResponse {
+    int32 id = 1;
+	string movie = 2;
+    string title = 3;
+    string category = 4;
+    string description = 5;
+    double  duration = 6;
+}
