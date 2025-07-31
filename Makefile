@@ -23,3 +23,6 @@ echo-v2:
 
 echo-v3:
 	buf generate proto/echo/v3/*.proto
+
+movies-v1:
+	buf generate proto/movies/v1/*.proto
