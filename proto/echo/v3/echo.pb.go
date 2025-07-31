@@ -120,7 +120,7 @@ const file_echo_v3_echo_proto_rawDesc = "" +
 	"\fEchoResponse\x12\x14\n" +
 	"\x05movie\x18\x01 \x01(\tR\x05movie2\xf4\x02\n" +
 	"\x04Echo\x12O\n" +
-	"\vEchoMessage\x12\x14.echo.v3.EchoRequest\x1a\x15.echo.v3.EchoResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/v2/echo\x12:\n" +
+	"\vEchoMessage\x12\x14.echo.v3.EchoRequest\x1a\x15.echo.v3.EchoResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/v3/echo\x12:\n" +
 	"\tUnaryEcho\x12\x14.echo.v3.EchoRequest\x1a\x15.echo.v3.EchoResponse\"\x00\x12F\n" +
 	"\x13ServerStreamingEcho\x12\x14.echo.v3.EchoRequest\x1a\x15.echo.v3.EchoResponse\"\x000\x01\x12F\n" +
 	"\x13ClientStreamingEcho\x12\x14.echo.v3.EchoRequest\x1a\x15.echo.v3.EchoResponse\"\x00(\x01\x12O\n" +

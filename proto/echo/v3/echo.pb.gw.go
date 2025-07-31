@@ -74,7 +74,7 @@ func RegisterEchoHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/echo.v3.Echo/EchoMessage", runtime.WithHTTPPathPattern("/v2/echo"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/echo.v3.Echo/EchoMessage", runtime.WithHTTPPathPattern("/v3/echo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -132,7 +132,7 @@ func RegisterEchoHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/echo.v3.Echo/EchoMessage", runtime.WithHTTPPathPattern("/v2/echo"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/echo.v3.Echo/EchoMessage", runtime.WithHTTPPathPattern("/v3/echo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -149,7 +149,7 @@ func RegisterEchoHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 }
 
 var (
-	pattern_Echo_EchoMessage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v2", "echo"}, ""))
+	pattern_Echo_EchoMessage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v3", "echo"}, ""))
 )
 
 var (

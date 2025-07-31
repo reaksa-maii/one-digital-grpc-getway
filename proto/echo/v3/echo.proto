@@ -9,7 +9,7 @@ package echo.v3;
 service Echo {
 	rpc EchoMessage (EchoRequest) returns (EchoResponse) {
 		option (google.api.http) = {
-      		post: "/v2/echo"
+      		post: "/v3/echo"
       		body: "*"
 		};
 	}

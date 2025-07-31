@@ -10,13 +10,17 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
+	
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/echo/v3"
 )
 
 var (
 	errMassaeg       = status.Errorf(codes.InvalidArgument, "missing invalide")
 	errInvalideToken = status.Error(codes.Unauthenticated, "unautheticate token")
 )
-
+type server struct {
+	
+}
 func logging(format string, a ...any) {
 	fmt.Printf("Log Error: \t"+format+"\n", a...)
 }
