@@ -7,11 +7,11 @@ import (
 	"io"
 	"log"
 	"net"
-
+	"./server/movieInterceptor"
+	
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v1"
 )
 
 var ports = flag.Int("port", 50051, "port server run time")
