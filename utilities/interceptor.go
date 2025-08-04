@@ -114,3 +114,6 @@ func StreamInterceptor(srv any, ss grpc.ServerStream, _ *grpc.StreamServerInfo, 
 	}
 	return err
 }
+func HelloOne(){
+	fmt.Printf("Hello One App");
+}
