@@ -118,9 +118,9 @@ const file_book_v1_book_proto_rawDesc = "" +
 	"\x1dGreeterServiceSayHelloRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\":\n" +
 	"\x1eGreeterServiceSayHelloResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2\x82\x01\n" +
-	"\x0eGreeterService\x12p\n" +
-	"\bSayHello\x12&.book.v1.GreeterServiceSayHelloRequest\x1a'.book.v1.GreeterServiceSayHelloResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/v1/bookB5Z3github.com/reaksa-maii/one_digital_grpc_getway/bookb\x06proto3"
+	"\amessage\x18\x01 \x01(\tR\amessage2\x8c\x01\n" +
+	"\x0eGreeterService\x12z\n" +
+	"\bSayHello\x12&.book.v1.GreeterServiceSayHelloRequest\x1a'.book.v1.GreeterServiceSayHelloResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/{name=messages/*}B5Z3github.com/reaksa-maii/one_digital_grpc_getway/bookb\x06proto3"
 
 var (
 	file_book_v1_book_proto_rawDescOnce sync.Once
