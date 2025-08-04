@@ -9,8 +9,7 @@ option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/book";
 service GreeterService {
   rpc SayHello(GreeterServiceSayHelloRequest) returns (GreeterServiceSayHelloResponse){
     option (google.api.http) = {
-      post: "/v1/book"
-      body: "*"
+      get: "/v1/{name=messages/*}"
     };
   }
 }
