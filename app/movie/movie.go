@@ -8,7 +8,7 @@ import (
 	"log"
 	"net"
 	
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v1"
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -21,7 +21,7 @@ type server struct {
 
 func (s *server) UnaryMovie(_ context.Context, in *pb.MovieRequest) (*pb.MovieResponse, error) {
 	fmt.Printf("Unary Movie Massage: %q\n", in.Title)
-	return &pb.MovieResponse{Movie: in.Movie}, nil
+	return &pb.MovieResponse{Title: in.Title}, nil
 }
 func (s *server) BidirectionalStreamingMovie(stream pb.Movie_BidirectionalStreamingMovieServer) error {
 	for {
@@ -33,8 +33,8 @@ func (s *server) BidirectionalStreamingMovie(stream pb.Movie_BidirectionalStream
 			}
 			return err
 		}
-		fmt.Printf("echoing message %q\n", in.Movie)
-		stream.Send(&pb.MovieResponse{Movie: in.Movie})
+		fmt.Printf("echoing message %q\n", in.Title)
+		stream.Send(&pb.MovieResponse{Title: in.Title})
 	}
 }
 func main() {
