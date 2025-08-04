@@ -3,7 +3,6 @@ package utilities
 import (
 	"context"
 	"fmt"
-	"io"
 	"strings"
 	"time"
 
@@ -27,26 +26,6 @@ func logger(format string, a ...any) {
 
 type server struct {
 	pb.UnimplementedMovieServer
-}
-
-func (s *server) UnaryEcho(_ context.Context, in *pb.MovieRequest) (*pb.MovieResponse, error) {
-	fmt.Printf("unary echoing message %q\n", in.Movie)
-	return &pb.MovieResponse{Movie: in.Movie}, nil
-}
-
-func (s *server) BidirectionalStreamingMovie(stream pb.Movie_BidirectionalStreamingMovieServer) error {
-	for {
-		in, err := stream.Recv()
-		if err != nil {
-			if err == io.EOF {
-				return nil
-			}
-			fmt.Printf("server: error receiving from stream: %v\n", err)
-			return err
-		}
-		fmt.Printf("bidi echoing message %q\n", in.Movie)
-		stream.Send(&pb.MovieResponse{Movie: in.Movie})
-	}
 }
 
 
