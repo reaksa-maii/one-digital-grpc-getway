@@ -62,7 +62,7 @@ func valid(authorization []string) bool {
 	return token == "some-secret-token"
 }
 
-func UnaryInterceptor(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
+func UnaryInterception(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 	// authentication (token verification)
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
@@ -98,7 +98,7 @@ func newWrappedStream(s grpc.ServerStream) grpc.ServerStream {
 	return &wrappedStream{s}
 }
 
-func StreamInterceptor(srv any, ss grpc.ServerStream, _ *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
+func StreamingInterceptor(srv any, ss grpc.ServerStream, _ *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 	// authentication (token verification)
 	md, ok := metadata.FromIncomingContext(ss.Context())
 	if !ok {
