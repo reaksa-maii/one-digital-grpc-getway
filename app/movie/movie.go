@@ -7,7 +7,7 @@ import (
 	"io"
 	"log"
 	"net"
-	
+
 	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -37,7 +37,7 @@ func (s *server) BidirectionalStreamingMovie(stream pb.Movie_BidirectionalStream
 		stream.Send(&pb.MovieResponse{Title: in.Title})
 	}
 }
-func main() {
+func runGRPCServer() error {
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *ports))
 	if err != nil {
@@ -49,5 +49,35 @@ func main() {
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
+	}
+}
+func runRESTServer() error {
+	lis, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		return err
+	}
+
+	s := grpc.NewServer()
+	pb.RegisterMovieServer(s, &server{})
+
+	// Enable reflection to allow clients to query the server's services
+	reflection.Register(s)
+
+	fmt.Println("Starting gRPC server on :8080...")
+	if err := s.Serve(lis); err != nil {
+		return err
+	}
+
+	return nil
+}
+func main() {
+	go func() {
+		if err := runRESTServer(); err != nil {
+			log.Fatalf("Failed to run REST server: %v", err)
+		}
+	}()
+
+	if err := runGRPCServer(); err != nil {
+		log.Fatalf("Failed to run gRPC server: %v", err)
 	}
 }
