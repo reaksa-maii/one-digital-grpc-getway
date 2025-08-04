@@ -7,7 +7,9 @@ import (
 	"io"
 	"log"
 	"net"
+	"net/http"
 
+	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
@@ -38,20 +40,6 @@ func (s *server) BidirectionalStreamingMovie(stream pb.Movie_BidirectionalStream
 	}
 }
 func runGRPCServer() error {
-	flag.Parse()
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *ports))
-	if err != nil {
-		fmt.Printf("Server not found! %v", err)
-	}
-	fmt.Printf("server listening at port %v\n", lis.Addr())
-	s := grpc.NewServer()
-	pb.RegisterMovieServer(s, &server{})
-	reflection.Register(s)
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
-	}
-}
-func runRESTServer() error {
 	lis, err := net.Listen("tcp", ":8080")
 	if err != nil {
 		return err
@@ -68,6 +56,15 @@ func runRESTServer() error {
 		return err
 	}
 
+	return nil
+}
+func runRESTServer() error {
+	mux := runtime.NewServeMux()
+
+	fmt.Println("Starting gRPC-Gateway server on :8081...")
+	if err := http.ListenAndServe(":8081", mux); err != nil {
+		return err
+	}
 	return nil
 }
 func main() {
