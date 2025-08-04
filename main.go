@@ -2,79 +2,57 @@ package main
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"net"
-	"net/http"
+	"io"
 
-	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/book/v1"
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v3"
+	// "github.com/reaksa-maii/one_digital_grpc_getway/utilities"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
-// Define the server struct, which implements the pb.UnimplementedGreeterServiceServer interface
+var port = flag.Int("port", 50051, "server start")
+
 type server struct {
-	pb.UnimplementedGreeterServiceServer
+	pb.UnimplementedMovieServer
 }
 
-// Implement the SayHello method of the pb.GreeterServiceServer interface
-func (s *server) SayHello(ctx context.Context, req *pb.GreeterServiceSayHelloRequest) (*pb.GreeterServiceSayHelloResponse, error) {
-	return &pb.GreeterServiceSayHelloResponse{
-		Message: fmt.Sprintf("Hello, %s!", req.Name),
-	}, nil
+func (s *server) UnaryMovie(ctx context.Context, in *pb.MovieRequest) (*pb.MovieResponse, error) {
+	fmt.Printf("Movie Unary Service")
+	return &pb.MovieResponse{MovieSize: in.MovieSize}, nil
 }
 
-// Set up the gRPC server on port 8080 and serve requests indefinitely
-func runGRPCServer() error {
-	lis, err := net.Listen("tcp", ":8080")
-	if err != nil {
-		return err
+func (s *server) BidirectionalStreamingMovie(stream pb.Movie_BidirectionalStreamingMovieServer) error {
+	for {
+		in, err := stream.Recv()
+		if err != nil {
+			if err == io.EOF {
+				return nil
+			}
+			fmt.Printf("server: error receiving from stream: %v\n", err)
+			return err
+		}
+		fmt.Printf("bidi echoing message %q\n", in.MovieSize)
+		stream.Send(&pb.MovieResponse{MovieSize: in.MovieSize})
 	}
-
-	s := grpc.NewServer()
-	pb.RegisterGreeterServiceServer(s, &server{})
-
-	// Enable reflection to allow clients to query the server's services
-	reflection.Register(s)
-
-	fmt.Println("Starting gRPC server on :8080...")
-	if err := s.Serve(lis); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// Set up the REST server on port 8081 and handle requests by proxying them to the gRPC server
-func runRESTServer() error {
-	ctx := context.Background()
-	mux := runtime.NewServeMux()
-
-	conn, err := grpc.DialContext(ctx, "localhost:8080", grpc.WithInsecure())
-	if err != nil {
-		return err
-	}
-
-	if err := pb.RegisterGreeterServiceHandler(ctx, mux, conn); err != nil {
-		return err
-	}
-
-	fmt.Println("Starting gRPC-Gateway server on :8081...")
-	if err := http.ListenAndServe(":8081", mux); err != nil {
-		return err
-	}
-	return nil
 }
 
 func main() {
-	go func() {
-		if err := runRESTServer(); err != nil {
-			log.Fatalf("Failed to run REST server: %v", err)
-		}
-	}()
+	flag.Parse()
+	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
+	if err != nil {
+		log.Fatalf("failed to listen: %v", err)
+	}
+	s := grpc.NewServer()
+	pb.RegisterMovieServer(s, &server{})
+	reflection.Register(s)
 
-	if err := runGRPCServer(); err != nil {
-		log.Fatalf("Failed to run gRPC server: %v", err)
+	fmt.Printf("server listening at %v\n", lis.Addr())
+
+	if err := s.Serve(lis); err != nil {
+		log.Fatalf("failed to serve: %v", err)
 	}
 }

@@ -1,9 +1,8 @@
-package server;
+package utilities
 
 import (
 	"context"
 	"fmt"
-	"io"
 	"strings"
 	"time"
 
@@ -29,25 +28,6 @@ type server struct {
 	pb.UnimplementedMovieServer
 }
 
-func (s *server) UnaryEcho(_ context.Context, in *pb.MovieRequest) (*pb.MovieResponse, error) {
-	fmt.Printf("unary echoing message %q\n", in.Movie)
-	return &pb.MovieResponse{Movie: in.Movie}, nil
-}
-
-func (s *server) BidirectionalStreamingMovie(stream pb.Movie_BidirectionalStreamingMovieServer) error {
-	for {
-		in, err := stream.Recv()
-		if err != nil {
-			if err == io.EOF {
-				return nil
-			}
-			fmt.Printf("server: error receiving from stream: %v\n", err)
-			return err
-		}
-		fmt.Printf("bidi echoing message %q\n", in.Movie)
-		stream.Send(&pb.MovieResponse{Movie: in.Movie})
-	}
-}
 
 // valid validates the authorization.
 func valid(authorization []string) bool {
@@ -61,7 +41,7 @@ func valid(authorization []string) bool {
 	return token == "some-secret-token"
 }
 
-func unaryInterceptor(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
+func UnaryInterception(ctx context.Context, req any, _ *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (any, error) {
 	// authentication (token verification)
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
@@ -97,7 +77,7 @@ func newWrappedStream(s grpc.ServerStream) grpc.ServerStream {
 	return &wrappedStream{s}
 }
 
-func streamInterceptor(srv any, ss grpc.ServerStream, _ *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
+func StreamingInterceptor(srv any, ss grpc.ServerStream, _ *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 	// authentication (token verification)
 	md, ok := metadata.FromIncomingContext(ss.Context())
 	if !ok {
@@ -112,4 +92,7 @@ func streamInterceptor(srv any, ss grpc.ServerStream, _ *grpc.StreamServerInfo, 
 		logger("RPC failed with error: %v", err)
 	}
 	return err
+}
+func HelloOne(){
+	fmt.Printf("Hello One App");
 }
