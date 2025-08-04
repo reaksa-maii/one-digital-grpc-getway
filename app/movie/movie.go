@@ -9,7 +9,7 @@ import (
 	"net/http"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v2"
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )

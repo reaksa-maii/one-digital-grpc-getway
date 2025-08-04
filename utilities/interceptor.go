@@ -1,4 +1,4 @@
-package server;
+package utilities
 
 import (
 	"context"
@@ -48,6 +48,7 @@ func (s *server) BidirectionalStreamingMovie(stream pb.Movie_BidirectionalStream
 		stream.Send(&pb.MovieResponse{Movie: in.Movie})
 	}
 }
+
 
 // valid validates the authorization.
 func valid(authorization []string) bool {
@@ -112,4 +113,7 @@ func streamInterceptor(srv any, ss grpc.ServerStream, _ *grpc.StreamServerInfo, 
 		logger("RPC failed with error: %v", err)
 	}
 	return err
+}
+func HelloPackage(){
+	fmt.Printf("Hell Owrold");
 }
