@@ -15,8 +15,6 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var ports = flag.Int("port", 50051, "port server run time")
-
 type server struct {
 	pb.UnimplementedMovieServer
 }
