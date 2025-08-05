@@ -14,7 +14,7 @@ const (
 	expectedServerSA = "maireaksa@gmail.com"
 )
 
-func authServer() {
+func AuthServer() {
 	clientOpts := alts.DefaultClientOptions()
 	clientOpts.TargetServiceAccounts = []string{expectedServerSA}
 	altsTC := alts.NewClientCreds(clientOpts)
@@ -36,7 +36,7 @@ func authServer() {
 	_ = ctx
 }
 
-func authToken() {
+func AuthToken() {
 
 	clientOpts := alts.DefaultClientOptions()
 	clientOpts.TargetServiceAccounts = []string{expectedServerSA}
