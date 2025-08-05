@@ -15,7 +15,7 @@ service GreeterService {
   }
   rpc GetHello(GreeterServiceSayHelloRequest) returns (GreeterServiceSayHelloResponse) {
     option (google.api.http) = {
-      	get: "/v4/{name=messages/*}"
+      	get: "/v4/echo/{name=messages/*}"
     };
   }
 }
