@@ -14,6 +14,7 @@ type server struct {
 }
 
 func RungRPC() error {
+	
 	lis, err := net.Listen("tcp", "localhost:50051")
 	if err != nil {
 		return err
@@ -24,7 +25,6 @@ func RungRPC() error {
 
 	// Enable reflection to allow clients to query the server's services
 	reflection.Register(s)
-
 	fmt.Println("Starting gRPC server on localhost:50051...")
 	if err := s.Serve(lis); err != nil {
 		return err
