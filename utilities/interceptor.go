@@ -10,8 +10,6 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
-
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v1"
 )
 
 var (
@@ -23,11 +21,6 @@ var (
 func logger(format string, a ...any) {
 	fmt.Printf("LOG:\t"+format+"\n", a...)
 }
-
-type server struct {
-	pb.UnimplementedMovieServer
-}
-
 
 // valid validates the authorization.
 func valid(authorization []string) bool {
