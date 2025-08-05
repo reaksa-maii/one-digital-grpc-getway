@@ -9,7 +9,7 @@ import (
 	"io"
 
 	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v3"
-	// "github.com/reaksa-maii/one_digital_grpc_getway/utilities"
+	"github.com/reaksa-maii/one_digital_grpc_getway/utilities"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -41,6 +41,8 @@ func (s *server) BidirectionalStreamingMovie(stream pb.Movie_BidirectionalStream
 }
 
 func main() {
+	utilities.GetMethod()
+	utilities.PostMethod()
 	flag.Parse()
 	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
 	if err != nil {

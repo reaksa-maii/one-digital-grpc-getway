@@ -8,29 +8,30 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v3"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials/alts"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
-const (
-	serverAdd         = "localhost:50051"
-	expectedServerSAC = "maireaksa@gmail.com"
-)
-
-func getMethod() error {
+func GetMethod() error {
 	ctx := context.Background()
 	mux := runtime.NewServeMux()
 
-	err := grpc.DialOption(ctx, "localhost:8080", grpc.WithInsecure())
+	conn, err := grpc.NewClient("localhost:8080", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return err
 	}
-	fmt.Println("Starting gRPC-Gateway server on :8081...")
-	if err := http.ListenAndServe(":8081", mux); err != nil {
+	defer conn.Close()
+
+	if err := pb.RegisterMovieHandler(ctx, mux, conn); err != nil {
+		return err
+	}
+
+	fmt.Println("Starting gRPC-Gateway server on localhost:8081...")
+	if err := http.ListenAndServe("localhost:8081", mux); err != nil {
 		return err
 	}
 	return nil
 }
-func postMethod() error {
+func PostMethod() error {
 	ctx := context.Background()
 	mux := runtime.NewServeMux()
 
