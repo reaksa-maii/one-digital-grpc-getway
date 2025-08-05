@@ -5,9 +5,15 @@ import (
 	"fmt"
 	"net/http"
 
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v3"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v3"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/alts"
+)
+
+const (
+	serverAdd         = "localhost:50051"
+	expectedServerSAC = "maireaksa@gmail.com"
 )
 
 func getMethod() error {
