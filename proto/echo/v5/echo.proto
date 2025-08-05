@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/echo";
+
+package echo.v5;
+
+service Messaging {
+    rpc GetMessage(GetMessageRequest) returns (Message) {
+        option (google.api.http) = {
+            get: "/v5/messages/{message_id}"
+            additional_bindings {
+                get: "/v5/users/{user_id}/messages/{message_id}"
+            };
+        };
+    }
+}
+
+message GetMessageRequest {
+    string message_id = 1;
+    string user_id = 2;
+}
+
+message Message {
+    string message_id = 1;
+    string user_id = 2;
+    string content = 3;
+}

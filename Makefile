@@ -30,6 +30,10 @@ echo-v3:
 echo-v4:
 	buf generate proto/echo/v4/*.proto
 
+echo-v5:
+	buf generate proto/echo/v5/*.proto
+
+	
 movies-v1:
 	buf generate proto/movie/v1/*.
 
