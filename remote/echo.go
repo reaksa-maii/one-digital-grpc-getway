@@ -28,7 +28,7 @@ func (s *server) SayHello(ctx context.Context, req *pb.GreeterServiceSayHelloReq
 
 // Set up the gRPC server on port 8080 and serve requests indefinitely
 func runGRPCServer() error {
-	lis, err := net.Listen("tcp", "localhost:8080")
+	lis, err := net.Listen("tcp", "localhost:50051")
 	if err != nil {
 		return err
 	}
@@ -39,7 +39,7 @@ func runGRPCServer() error {
 	// Enable reflection to allow clients to query the server's services
 	reflection.Register(s)
 
-	fmt.Println("Starting gRPC server on localhost:8080...")
+	fmt.Println("Starting gRPC server on localhost:50051...")
 	if err := s.Serve(lis); err != nil {
 		return err
 	}

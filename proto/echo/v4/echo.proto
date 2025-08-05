@@ -13,6 +13,11 @@ service GreeterService {
       body: "*"
     };
   }
+  rpc GetHello(GreeterServiceSayHelloRequest) returns (GreeterServiceSayHelloResponse) {
+    option (google.api.http) = {
+      	get: "/v4/{name=messages/*}"
+    };
+  }
 }
 
 message GreeterServiceSayHelloRequest {
