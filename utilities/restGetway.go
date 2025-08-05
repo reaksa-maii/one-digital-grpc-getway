@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"log"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v3"
@@ -42,6 +43,19 @@ func PostMethod() error {
 		return err
 	}
 
-	fmt.Println("Starting gRPC-Gateway server on :8081...")
-	return http.ListenAndServe(":8081", mux)
+	fmt.Println("Starting gRPC-Gateway server on localhost:8081...")
+	return http.ListenAndServe("localhost:8081", mux)
+}
+
+func RunRestFull() error {
+	go func() {
+		if err := GetMethod(); err != nil {
+			log.Fatalf("Failed to run REST server: %v", err)
+		}
+	}()
+
+	if err := PostMethod(); err != nil {
+		log.Fatalf("Failed to run gRPC server: %v", err)
+	}
+	return nil;
 }
