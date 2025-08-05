@@ -42,3 +42,6 @@ movies-v2:
 
 movies-v3:
 	buf generate proto/movie/v3/*.proto
+
+google-v1:
+	buf generate proto/google/v1/*.proto

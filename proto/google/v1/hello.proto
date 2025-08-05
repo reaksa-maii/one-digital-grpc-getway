@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "google/api/httpbody.proto";
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/google";
+
+package google.v1;
+
+service HttpBodyExampleService {
+	rpc HelloWorld(google.protobuf.Empty) returns (google.api.HttpBody) {
+		option (google.api.http) = {
+			get: "/helloworld"
+		};
+	}
+	rpc Download(google.protobuf.Empty) returns (stream google.api.HttpBody) {
+		option (google.api.http) = {
+			get: "/download"
+		};
+	}
+}
