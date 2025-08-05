@@ -25,6 +25,9 @@ func (s *server) SayHello(ctx context.Context, req *pb.GreeterServiceSayHelloReq
 		Message: fmt.Sprintf("Hello, %s!", req.Name),
 	}, nil
 }
+func (s *server) GetHello(ctx context.Context, in *pb.GreeterServiceSayHelloRequest) (*pb.GreeterServiceSayHelloResponse, error) {
+	return &pb.GreeterServiceSayHelloResponse{Message: in.GetName()}, nil
+}
 
 // Set up the gRPC server on port 8080 and serve requests indefinitely
 func runGRPCServer() error {
@@ -49,7 +52,7 @@ func runGRPCServer() error {
 
 // Set up the REST server on port 8081 and handle requests by proxying them to the gRPC server
 func runRESTServer() error {
-	ctx := context.Background()
+	ctx := context.TODO()
 	mux := runtime.NewServeMux()
 
 	conn, err := grpc.NewClient("localhost:8080", grpc.WithTransportCredentials(insecure.NewCredentials()))

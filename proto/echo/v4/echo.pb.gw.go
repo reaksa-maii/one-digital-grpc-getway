@@ -133,7 +133,7 @@ func RegisterGreeterServiceHandlerServer(ctx context.Context, mux *runtime.Serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/echo.v4.GreeterService/GetHello", runtime.WithHTTPPathPattern("/v4/{name=messages/*}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/echo.v4.GreeterService/GetHello", runtime.WithHTTPPathPattern("/v4/echo/{name=messages/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -208,7 +208,7 @@ func RegisterGreeterServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/echo.v4.GreeterService/GetHello", runtime.WithHTTPPathPattern("/v4/{name=messages/*}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/echo.v4.GreeterService/GetHello", runtime.WithHTTPPathPattern("/v4/echo/{name=messages/*}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -226,7 +226,7 @@ func RegisterGreeterServiceHandlerClient(ctx context.Context, mux *runtime.Serve
 
 var (
 	pattern_GreeterService_SayHello_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v4", "echo"}, ""))
-	pattern_GreeterService_GetHello_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 2, 5, 2}, []string{"v4", "messages", "name"}, ""))
+	pattern_GreeterService_GetHello_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 2, 5, 3}, []string{"v4", "echo", "messages", "name"}, ""))
 )
 
 var (

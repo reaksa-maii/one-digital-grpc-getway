@@ -118,10 +118,10 @@ const file_echo_v4_echo_proto_rawDesc = "" +
 	"\x1dGreeterServiceSayHelloRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\":\n" +
 	"\x1eGreeterServiceSayHelloResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2\xfe\x01\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2\x83\x02\n" +
 	"\x0eGreeterService\x12p\n" +
-	"\bSayHello\x12&.echo.v4.GreeterServiceSayHelloRequest\x1a'.echo.v4.GreeterServiceSayHelloResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/v4/echo\x12z\n" +
-	"\bGetHello\x12&.echo.v4.GreeterServiceSayHelloRequest\x1a'.echo.v4.GreeterServiceSayHelloResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v4/{name=messages/*}B5Z3github.com/reaksa-maii/one_digital_grpc_getway/echob\x06proto3"
+	"\bSayHello\x12&.echo.v4.GreeterServiceSayHelloRequest\x1a'.echo.v4.GreeterServiceSayHelloResponse\"\x13\x82\xd3\xe4\x93\x02\r:\x01*\"\b/v4/echo\x12\x7f\n" +
+	"\bGetHello\x12&.echo.v4.GreeterServiceSayHelloRequest\x1a'.echo.v4.GreeterServiceSayHelloResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v4/echo/{name=messages/*}B5Z3github.com/reaksa-maii/one_digital_grpc_getway/echob\x06proto3"
 
 var (
 	file_echo_v4_echo_proto_rawDescOnce sync.Once
