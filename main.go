@@ -2,17 +2,18 @@ package main
 
 import (
 	"log"
-	"github.com/reaksa-maii/one_digital_grpc_getway/utilities"
+	"github.com/reaksa-maii/one_digital_grpc_getway/gateway"
 )
 
 func main() {
+	
 	go func() {
-		if err := utilities.GetMethod(); err != nil {
+		if err := gateway.PostMethod(); err != nil {
 			log.Fatalf("Failed to run REST server: %v", err)
 		}
 	}()
 
-	if err := utilities.RungRPC(); err != nil {
+	if err := gateway.RungRPC(); err != nil {
 		log.Fatalf("Failed to run gRPC server: %v", err)
 	}
 }
