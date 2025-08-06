@@ -7,7 +7,7 @@ import (
 	"log"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v3"
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/podcast/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )
@@ -22,7 +22,7 @@ func GetMethod() error {
 	}
 	defer conn.Close()
 
-	if err := pb.RegisterMovieHandler(ctx, mux, conn); err != nil {
+	if err := pb.RegisterPodcatServiceHandler(ctx, mux, conn); err != nil {
 		return err
 	}
 
@@ -38,7 +38,7 @@ func PostMethod() error {
 
 	opts := []grpc.DialOption{grpc.WithInsecure()} // or use credentials.NewClientTLSFromCert() for secure connection
 
-	err := pb.RegisterMovieHandlerFromEndpoint(ctx, mux, "localhost:8080", opts)
+	err := pb.RegisterPodcatServiceHandlerFromEndpoint(ctx, mux, "localhost:8080", opts)
 	if err != nil {
 		return err
 	}

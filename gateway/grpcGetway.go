@@ -1,29 +1,74 @@
 package gateway
 
 import (
+	"context"
 	"fmt"
+	"log"
 	"net"
 
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/movie/v3"
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/podcast/v1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
 
 type server struct {
-	pb.UnimplementedMovieServer
+	pb.UnimplementedPodcatServiceServer
 }
 
+func (s *server) CreatePodcast(ctx context.Context, in *pb.PodcatRequest) (*pb.PodcatResponse, error) {
+	return &pb.PodcatResponse{
+		Id:          in.Id,
+		PodcatSize:  in.PodcatSize,
+		Title:       in.Title,
+		Category:    in.Category,
+		Description: in.Description,
+		Duration:    in.Duration,
+	}, nil
+}
+func (s *server) GetPodcatByTitle(ctx context.Context, req *pb.PodcatRequest) (*pb.PodcatResponse, error) {
+	log.Printf("GetPodcatByTitle called with: %s\n", req.Title)
+	return &pb.PodcatResponse{Id: 1, Title: req.Title}, nil
+}
+func (s *server) ServerStreamingPodcat(req *pb.PodcatRequest, stream pb.PodcatService_ServerStreamingPodcatServer) error {
+	for i := 0; i < 5; i++ {
+		stream.Send(&pb.PodcatResponse{Title: req.Title, PodcatSize: "size", Duration: float64(i)})
+	}
+	return nil
+}
+
+func (s *server) ClientStreamingPodcat(stream pb.PodcatService_ClientStreamingPodcatServer) error {
+	var last *pb.PodcatRequest
+	for {
+		req, err := stream.Recv()
+		if err != nil {
+			break
+		}
+		last = req
+	}
+	return stream.SendAndClose(&pb.PodcatResponse{Title: last.GetTitle(), Description: "Last received"})
+}
+
+func (s *server) BidirectionalStreamingPodcat(stream pb.PodcatService_BidirectionalStreamingPodcatServer) error {
+	for {
+		req, err := stream.Recv()
+		if err != nil {
+			break
+		}
+		resp := &pb.PodcatResponse{Title: req.Title + " (echo)"}
+		stream.Send(resp)
+	}
+	return nil
+}
 func RungRPC() error {
-	
+
 	lis, err := net.Listen("tcp", "localhost:50051")
 	if err != nil {
 		return err
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterMovieServer(s, &server{})
+	pb.RegisterPodcatServiceServer(s, &server{})
 
-	// Enable reflection to allow clients to query the server's services
 	reflection.Register(s)
 	fmt.Println("Starting gRPC server on localhost:50051...")
 	if err := s.Serve(lis); err != nil {
