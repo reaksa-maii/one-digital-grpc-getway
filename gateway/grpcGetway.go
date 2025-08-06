@@ -27,7 +27,11 @@ func (s *server) CreatePodcast(ctx context.Context, in *pb.PodcatRequest) (*pb.P
 }
 func (s *server) GetPodcatByTitle(ctx context.Context, req *pb.PodcatRequest) (*pb.PodcatResponse, error) {
 	log.Printf("GetPodcatByTitle called with: %s\n", req.Title)
-	return &pb.PodcatResponse{Id: 1, Title: req.Title}, nil
+	return &pb.PodcatResponse{Title: req.GetTitle()}, nil
+}
+func (s *server) UnaryPodcast(ctx context.Context, req *pb.PodcatRequest) (*pb.PodcatResponse, error) {
+	log.Printf("GetPodcatByTitle called with: %s\n", req.Title)
+	return &pb.PodcatResponse{Title: req.GetTitle()}, nil
 }
 func (s *server) ServerStreamingPodcat(req *pb.PodcatRequest, stream pb.PodcatService_ServerStreamingPodcatServer) error {
 	for i := 0; i < 5; i++ {

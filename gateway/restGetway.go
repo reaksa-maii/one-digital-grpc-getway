@@ -34,6 +34,9 @@ func GetMethod() error {
 }
 func PostMethod() error {
 	ctx := context.Background()
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+	
 	mux := runtime.NewServeMux()
 
 	opts := []grpc.DialOption{grpc.WithInsecure()} // or use credentials.NewClientTLSFromCert() for secure connection
