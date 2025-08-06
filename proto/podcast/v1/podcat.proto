@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/podcat";
+
+package podcat.v1;
+
+service PodcatService {
+	rpc CreatePodcast (PodcatRequest) returns (PodcatResponse) {
+		option (google.api.http) = {
+      		post: "/v1/podcat"
+      		body: "*"
+		};
+	}
+	rpc GetPodcatTitle (PodcatRequest) returns (PodcatResponse) {
+		option (google.api.http) = {
+      		get: "/v1/{title=messages/*}"
+		};
+	}
+    rpc UnaryPodcast(PodcatRequest) returns (PodcatResponse) {}
+    rpc ServerStreamingPodcat(PodcatRequest) returns (stream PodcatResponse) {}
+    rpc ClientStreamingPodcat(stream PodcatRequest) returns (PodcatResponse) {}
+    rpc BidirectionalStreamingPodcat(stream PodcatRequest) returns (stream PodcatResponse) {}
+}
+
+
+message PodcatRequest {
+    int32 id = 1;
+	string podcat_size = 2;
+    string title = 3;
+    string category = 4;
+    string description = 5;
+    double  duration = 6;
+}
+
+message PodcatResponse {
+    int32 id = 1;
+	string podcat_size = 2;
+    string title = 3;
+    string category = 4;
+    string description = 5;
+    double  duration = 6;
+}
