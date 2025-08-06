@@ -8,7 +8,7 @@ import (
 func main() {
 
 	go func() {
-		if err := gateway.PostMethod(); err != nil {
+		if err := gateway.GetMethod(); err != nil {
 			log.Fatalf("Failed to run REST server: %v", err)
 		}
 	}()

@@ -26,7 +26,7 @@ func GetMethod() error {
 		return err
 	}
 
-	fmt.Println("Starting gRPC-Gateway server on localhost:8081...")
+	fmt.Println("Starting RestFull server on localhost:8081...")
 	if err := http.ListenAndServe("localhost:8081", mux); err != nil {
 		return err
 	}
