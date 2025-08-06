@@ -13,7 +13,7 @@ service PodcatService {
       		body: "*"
 		};
 	}
-	rpc GetPodcatTitle (PodcatRequest) returns (PodcatResponse) {
+	rpc GetPodcatByTitle (PodcatRequest) returns (PodcatResponse) {
 		option (google.api.http) = {
       		get: "/v1/{title=messages/*}"
 		};
