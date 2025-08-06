@@ -7,15 +7,13 @@ import (
 
 func main() {
 
-	// go func() {
-	// 	if err := gateway.PostMethod(); err != nil {
-	// 		log.Fatalf("Failed to run REST server: %v", err)
-	// 	}
-	// }()
+	go func() {
+		if err := gateway.PostMethod(); err != nil {
+			log.Fatalf("Failed to run REST server: %v", err)
+		}
+	}()
 
-	// if err := gateway.RungRPC(); err != nil {
-	// 	log.Fatalf("Failed to run gRPC server: %v", err)
-	// }
-	log.Printf("Server strat")
-	gateway.RungRPC()
+	if err := gateway.RungRPC(); err != nil {
+		log.Fatalf("Failed to run gRPC server: %v", err)
+	}
 }
