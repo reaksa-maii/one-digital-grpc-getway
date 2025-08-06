@@ -41,7 +41,7 @@ func PostMethod() error {
 	defer cancel()
 	mux := runtime.NewServeMux()
 
-	conn, err := grpc.DialContext(ctx, ":8080", grpc.WithInsecure())
+	conn, err := grpc.DialContext(ctx, "localhost:50051", grpc.WithInsecure())
 	if err != nil {
 		return err
 	}
@@ -50,8 +50,8 @@ func PostMethod() error {
 		return err
 	}
 
-	fmt.Println("Starting Rest-Gateway server on :8081...")
-	if err := http.ListenAndServe(":8081", mux); err != nil {
+	fmt.Println("Starting Rest-Gateway server on localhost:8081...")
+	if err := http.ListenAndServe("localhost:8081", mux); err != nil {
 		return err
 	}
 	return nil
