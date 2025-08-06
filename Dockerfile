@@ -15,7 +15,7 @@ COPY . .
 RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o /app/myapp .
 
 # Runtime Stage
-FROM alpine:latest
+FROM alpine:1.24-alpine
 
 # Install ca-certificates for HTTPS communication if needed
 RUN apk update --no-cache && apk add --no-cache ca-certificates
