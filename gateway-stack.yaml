@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  grpc-gateway:
+    image: reaksa7236/getway-grpc:master
+    container_name: grpc-gateway
+    ports:
+      - "3000:3000"
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
