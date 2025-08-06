@@ -2,6 +2,7 @@ package gateway
 
 import (
 	"context"
+	"flag"
 	"fmt"
 	"log"
 	"net"
@@ -10,6 +11,8 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
+
+var port = flag.Int("port", 50051, "the port to serve on")
 
 type server struct {
 	pb.UnimplementedPodcatServiceServer
@@ -25,14 +28,17 @@ func (s *server) CreatePodcast(ctx context.Context, in *pb.PodcatRequest) (*pb.P
 		Duration:    in.Duration,
 	}, nil
 }
+
 func (s *server) GetPodcatByTitle(ctx context.Context, req *pb.PodcatRequest) (*pb.PodcatResponse, error) {
 	log.Printf("GetPodcatByTitle called with: %s\n", req.Title)
 	return &pb.PodcatResponse{Title: req.GetTitle()}, nil
 }
+
 func (s *server) UnaryPodcast(ctx context.Context, req *pb.PodcatRequest) (*pb.PodcatResponse, error) {
 	log.Printf("GetPodcatByTitle called with: %s\n", req.Title)
 	return &pb.PodcatResponse{Title: req.GetTitle()}, nil
 }
+
 func (s *server) ServerStreamingPodcat(req *pb.PodcatRequest, stream pb.PodcatService_ServerStreamingPodcatServer) error {
 	for i := 0; i < 5; i++ {
 		stream.Send(&pb.PodcatResponse{Title: req.Title, PodcatSize: "size", Duration: float64(i)})
@@ -64,8 +70,8 @@ func (s *server) BidirectionalStreamingPodcat(stream pb.PodcatService_Bidirectio
 	return nil
 }
 func RungRPC() error {
-
-	lis, err := net.Listen("tcp", "localhost:50051")
+	flag.Parse()
+	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
 	if err != nil {
 		return err
 	}
@@ -74,7 +80,7 @@ func RungRPC() error {
 	pb.RegisterPodcatServiceServer(s, &server{})
 
 	reflection.Register(s)
-	fmt.Println("Starting gRPC server on localhost:50051...")
+	fmt.Printf("gRPC server listening at %v\n", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		return err
 	}
