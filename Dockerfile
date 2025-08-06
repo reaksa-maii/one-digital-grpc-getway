@@ -27,6 +27,6 @@ COPY --from=builder /app/myapp /app/myapp
 
 # Expose the port your application listens on
 EXPOSE 8081
-
+EXPOSE 50051
 # Command to run when the container starts
 CMD ["/app/myapp"]
