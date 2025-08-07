@@ -12,7 +12,6 @@ import (
 	"google.golang.org/grpc/reflection"
 )
 
-var port = flag.Int("port", 50051, "the port to serve on")
 
 type server struct {
 	pb.UnimplementedPodcatServiceServer
@@ -70,8 +69,9 @@ func (s *server) BidirectionalStreamingPodcat(stream pb.PodcatService_Bidirectio
 	return nil
 }
 func RungRPC() error {
+	var port = flag.Int("port", 50051, "the port to serve on")
 	flag.Parse()
-	lis, err := net.Listen("tcp", fmt.Sprintf("localhost:%d", *port))
+	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
 		return err
 	}

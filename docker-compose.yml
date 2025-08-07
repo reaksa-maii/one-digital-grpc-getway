@@ -7,6 +7,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - "50051:50051" 
-      # - "8081:8081" 
+      - "8081:8081" 
 
-I6Ikpv&aG#4gRG9lIiwiY
