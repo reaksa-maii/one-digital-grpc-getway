@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/api/annotations.proto";
 
-option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/podcat";
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/podcat;podcatv1";
 
 package podcat.v1;
 
@@ -13,9 +13,9 @@ service PodcatService {
       		body: "*"
 		};
 	}
-	rpc GetPodcatByTitle (PodcatRequest) returns (PodcatResponse) {
+	rpc GetPodcatByTitle (GetByTitleRequest) returns (PodcatResponse) {
 		option (google.api.http) = {
-      		get: "/v1/{title=messages/*}"
+      		get: "/v1/podcat/{title}"
 		};
 	}
     rpc UnaryPodcast(PodcatRequest) returns (PodcatResponse) {}
@@ -41,4 +41,7 @@ message PodcatResponse {
     string category = 4;
     string description = 5;
     double  duration = 6;
+}
+message GetByTitleRequest {
+  string title = 1;
 }
