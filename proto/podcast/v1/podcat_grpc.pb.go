@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: podcast/v1/podcat.proto
 
-package podcat
+package podcatv1
 
 import (
 	context "context"
@@ -32,7 +32,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PodcatServiceClient interface {
 	CreatePodcast(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (*PodcatResponse, error)
-	GetPodcatByTitle(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (*PodcatResponse, error)
+	GetPodcatByTitle(ctx context.Context, in *GetByTitleRequest, opts ...grpc.CallOption) (*PodcatResponse, error)
 	UnaryPodcast(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (*PodcatResponse, error)
 	ServerStreamingPodcat(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[PodcatResponse], error)
 	ClientStreamingPodcat(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[PodcatRequest, PodcatResponse], error)
@@ -57,7 +57,7 @@ func (c *podcatServiceClient) CreatePodcast(ctx context.Context, in *PodcatReque
 	return out, nil
 }
 
-func (c *podcatServiceClient) GetPodcatByTitle(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (*PodcatResponse, error) {
+func (c *podcatServiceClient) GetPodcatByTitle(ctx context.Context, in *GetByTitleRequest, opts ...grpc.CallOption) (*PodcatResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PodcatResponse)
 	err := c.cc.Invoke(ctx, PodcatService_GetPodcatByTitle_FullMethodName, in, out, cOpts...)
@@ -127,7 +127,7 @@ type PodcatService_BidirectionalStreamingPodcatClient = grpc.BidiStreamingClient
 // for forward compatibility.
 type PodcatServiceServer interface {
 	CreatePodcast(context.Context, *PodcatRequest) (*PodcatResponse, error)
-	GetPodcatByTitle(context.Context, *PodcatRequest) (*PodcatResponse, error)
+	GetPodcatByTitle(context.Context, *GetByTitleRequest) (*PodcatResponse, error)
 	UnaryPodcast(context.Context, *PodcatRequest) (*PodcatResponse, error)
 	ServerStreamingPodcat(*PodcatRequest, grpc.ServerStreamingServer[PodcatResponse]) error
 	ClientStreamingPodcat(grpc.ClientStreamingServer[PodcatRequest, PodcatResponse]) error
@@ -145,7 +145,7 @@ type UnimplementedPodcatServiceServer struct{}
 func (UnimplementedPodcatServiceServer) CreatePodcast(context.Context, *PodcatRequest) (*PodcatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePodcast not implemented")
 }
-func (UnimplementedPodcatServiceServer) GetPodcatByTitle(context.Context, *PodcatRequest) (*PodcatResponse, error) {
+func (UnimplementedPodcatServiceServer) GetPodcatByTitle(context.Context, *GetByTitleRequest) (*PodcatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPodcatByTitle not implemented")
 }
 func (UnimplementedPodcatServiceServer) UnaryPodcast(context.Context, *PodcatRequest) (*PodcatResponse, error) {
@@ -200,7 +200,7 @@ func _PodcatService_CreatePodcast_Handler(srv interface{}, ctx context.Context, 
 }
 
 func _PodcatService_GetPodcatByTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PodcatRequest)
+	in := new(GetByTitleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -212,7 +212,7 @@ func _PodcatService_GetPodcatByTitle_Handler(srv interface{}, ctx context.Contex
 		FullMethod: PodcatService_GetPodcatByTitle_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PodcatServiceServer).GetPodcatByTitle(ctx, req.(*PodcatRequest))
+		return srv.(PodcatServiceServer).GetPodcatByTitle(ctx, req.(*GetByTitleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

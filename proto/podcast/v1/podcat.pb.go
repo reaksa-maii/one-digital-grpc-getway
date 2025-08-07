@@ -4,7 +4,7 @@
 // 	protoc        (unknown)
 // source: podcast/v1/podcat.proto
 
-package podcat
+package podcatv1
 
 import (
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -190,6 +190,50 @@ func (x *PodcatResponse) GetDuration() float64 {
 	return 0
 }
 
+type GetByTitleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetByTitleRequest) Reset() {
+	*x = GetByTitleRequest{}
+	mi := &file_podcast_v1_podcat_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetByTitleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetByTitleRequest) ProtoMessage() {}
+
+func (x *GetByTitleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_podcast_v1_podcat_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetByTitleRequest.ProtoReflect.Descriptor instead.
+func (*GetByTitleRequest) Descriptor() ([]byte, []int) {
+	return file_podcast_v1_podcat_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetByTitleRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
 var File_podcast_v1_podcat_proto protoreflect.FileDescriptor
 
 const file_podcast_v1_podcat_proto_rawDesc = "" +
@@ -210,15 +254,17 @@ const file_podcast_v1_podcat_proto_rawDesc = "" +
 	"\x05title\x18\x03 \x01(\tR\x05title\x12\x1a\n" +
 	"\bcategory\x18\x04 \x01(\tR\bcategory\x12 \n" +
 	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
-	"\bduration\x18\x06 \x01(\x01R\bduration2\x9b\x04\n" +
+	"\bduration\x18\x06 \x01(\x01R\bduration\")\n" +
+	"\x11GetByTitleRequest\x12\x14\n" +
+	"\x05title\x18\x01 \x01(\tR\x05title2\x9b\x04\n" +
 	"\rPodcatService\x12[\n" +
 	"\rCreatePodcast\x12\x18.podcat.v1.PodcatRequest\x1a\x19.podcat.v1.PodcatResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
 	"/v1/podcat\x12g\n" +
-	"\x10GetPodcatByTitle\x12\x18.podcat.v1.PodcatRequest\x1a\x19.podcat.v1.PodcatResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/{title=messages/*}\x12E\n" +
+	"\x10GetPodcatByTitle\x12\x1c.podcat.v1.GetByTitleRequest\x1a\x19.podcat.v1.PodcatResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/v1/podcat/{title}\x12E\n" +
 	"\fUnaryPodcast\x12\x18.podcat.v1.PodcatRequest\x1a\x19.podcat.v1.PodcatResponse\"\x00\x12P\n" +
 	"\x15ServerStreamingPodcat\x12\x18.podcat.v1.PodcatRequest\x1a\x19.podcat.v1.PodcatResponse\"\x000\x01\x12P\n" +
 	"\x15ClientStreamingPodcat\x12\x18.podcat.v1.PodcatRequest\x1a\x19.podcat.v1.PodcatResponse\"\x00(\x01\x12Y\n" +
-	"\x1cBidirectionalStreamingPodcat\x12\x18.podcat.v1.PodcatRequest\x1a\x19.podcat.v1.PodcatResponse\"\x00(\x010\x01B7Z5github.com/reaksa-maii/one_digital_grpc_getway/podcatb\x06proto3"
+	"\x1cBidirectionalStreamingPodcat\x12\x18.podcat.v1.PodcatRequest\x1a\x19.podcat.v1.PodcatResponse\"\x00(\x010\x01B@Z>github.com/reaksa-maii/one_digital_grpc_getway/podcat;podcatv1b\x06proto3"
 
 var (
 	file_podcast_v1_podcat_proto_rawDescOnce sync.Once
@@ -232,14 +278,15 @@ func file_podcast_v1_podcat_proto_rawDescGZIP() []byte {
 	return file_podcast_v1_podcat_proto_rawDescData
 }
 
-var file_podcast_v1_podcat_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_podcast_v1_podcat_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_podcast_v1_podcat_proto_goTypes = []any{
-	(*PodcatRequest)(nil),  // 0: podcat.v1.PodcatRequest
-	(*PodcatResponse)(nil), // 1: podcat.v1.PodcatResponse
+	(*PodcatRequest)(nil),     // 0: podcat.v1.PodcatRequest
+	(*PodcatResponse)(nil),    // 1: podcat.v1.PodcatResponse
+	(*GetByTitleRequest)(nil), // 2: podcat.v1.GetByTitleRequest
 }
 var file_podcast_v1_podcat_proto_depIdxs = []int32{
 	0, // 0: podcat.v1.PodcatService.CreatePodcast:input_type -> podcat.v1.PodcatRequest
-	0, // 1: podcat.v1.PodcatService.GetPodcatByTitle:input_type -> podcat.v1.PodcatRequest
+	2, // 1: podcat.v1.PodcatService.GetPodcatByTitle:input_type -> podcat.v1.GetByTitleRequest
 	0, // 2: podcat.v1.PodcatService.UnaryPodcast:input_type -> podcat.v1.PodcatRequest
 	0, // 3: podcat.v1.PodcatService.ServerStreamingPodcat:input_type -> podcat.v1.PodcatRequest
 	0, // 4: podcat.v1.PodcatService.ClientStreamingPodcat:input_type -> podcat.v1.PodcatRequest
@@ -268,7 +315,7 @@ func file_podcast_v1_podcat_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_podcast_v1_podcat_proto_rawDesc), len(file_podcast_v1_podcat_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
