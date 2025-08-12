@@ -4,7 +4,7 @@
 // - protoc             (unknown)
 // source: podcast/v2/podcast.proto
 
-package podcast
+package podcatv2
 
 import (
 	context "context"
@@ -19,103 +19,334 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PodcastService_SayHello_FullMethodName = "/podcast.v1.PodcastService/SayHello"
+	PodcatService_CreatePodcast_FullMethodName                = "/podcat.v2.PodcatService/CreatePodcast"
+	PodcatService_GetPodcatByTitle_FullMethodName             = "/podcat.v2.PodcatService/GetPodcatByTitle"
+	PodcatService_ListAuthors_FullMethodName                  = "/podcat.v2.PodcatService/ListAuthors"
+	PodcatService_UnaryPodcast_FullMethodName                 = "/podcat.v2.PodcatService/UnaryPodcast"
+	PodcatService_ServerStreamingPodcat_FullMethodName        = "/podcat.v2.PodcatService/ServerStreamingPodcat"
+	PodcatService_ClientStreamingPodcat_FullMethodName        = "/podcat.v2.PodcatService/ClientStreamingPodcat"
+	PodcatService_BidirectionalStreamingPodcat_FullMethodName = "/podcat.v2.PodcatService/BidirectionalStreamingPodcat"
 )
 
-// PodcastServiceClient is the client API for PodcastService service.
+// PodcatServiceClient is the client API for PodcatService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PodcastServiceClient interface {
-	SayHello(ctx context.Context, in *PodcastServiceRequest, opts ...grpc.CallOption) (*PodcastServiceResponse, error)
+//
+// ================= Service Definition =================
+type PodcatServiceClient interface {
+	// Create new podcast
+	CreatePodcast(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (*PodcatResponse, error)
+	// Get podcast by title
+	GetPodcatByTitle(ctx context.Context, in *GetByTitleRequest, opts ...grpc.CallOption) (*PodcatResponse, error)
+	// Fetch authors from external API
+	ListAuthors(ctx context.Context, in *ListAuthorsRequest, opts ...grpc.CallOption) (*ListAuthorsResponse, error)
+	// Streaming examples
+	UnaryPodcast(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (*PodcatResponse, error)
+	ServerStreamingPodcat(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[PodcatResponse], error)
+	ClientStreamingPodcat(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[PodcatRequest, PodcatResponse], error)
+	BidirectionalStreamingPodcat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[PodcatRequest, PodcatResponse], error)
 }
 
-type podcastServiceClient struct {
+type podcatServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPodcastServiceClient(cc grpc.ClientConnInterface) PodcastServiceClient {
-	return &podcastServiceClient{cc}
+func NewPodcatServiceClient(cc grpc.ClientConnInterface) PodcatServiceClient {
+	return &podcatServiceClient{cc}
 }
 
-func (c *podcastServiceClient) SayHello(ctx context.Context, in *PodcastServiceRequest, opts ...grpc.CallOption) (*PodcastServiceResponse, error) {
+func (c *podcatServiceClient) CreatePodcast(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (*PodcatResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(PodcastServiceResponse)
-	err := c.cc.Invoke(ctx, PodcastService_SayHello_FullMethodName, in, out, cOpts...)
+	out := new(PodcatResponse)
+	err := c.cc.Invoke(ctx, PodcatService_CreatePodcast_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PodcastServiceServer is the server API for PodcastService service.
-// All implementations must embed UnimplementedPodcastServiceServer
-// for forward compatibility.
-type PodcastServiceServer interface {
-	SayHello(context.Context, *PodcastServiceRequest) (*PodcastServiceResponse, error)
-	mustEmbedUnimplementedPodcastServiceServer()
+func (c *podcatServiceClient) GetPodcatByTitle(ctx context.Context, in *GetByTitleRequest, opts ...grpc.CallOption) (*PodcatResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PodcatResponse)
+	err := c.cc.Invoke(ctx, PodcatService_GetPodcatByTitle_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
-// UnimplementedPodcastServiceServer must be embedded to have
+func (c *podcatServiceClient) ListAuthors(ctx context.Context, in *ListAuthorsRequest, opts ...grpc.CallOption) (*ListAuthorsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAuthorsResponse)
+	err := c.cc.Invoke(ctx, PodcatService_ListAuthors_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *podcatServiceClient) UnaryPodcast(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (*PodcatResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PodcatResponse)
+	err := c.cc.Invoke(ctx, PodcatService_UnaryPodcast_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *podcatServiceClient) ServerStreamingPodcat(ctx context.Context, in *PodcatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[PodcatResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &PodcatService_ServiceDesc.Streams[0], PodcatService_ServerStreamingPodcat_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[PodcatRequest, PodcatResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PodcatService_ServerStreamingPodcatClient = grpc.ServerStreamingClient[PodcatResponse]
+
+func (c *podcatServiceClient) ClientStreamingPodcat(ctx context.Context, opts ...grpc.CallOption) (grpc.ClientStreamingClient[PodcatRequest, PodcatResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &PodcatService_ServiceDesc.Streams[1], PodcatService_ClientStreamingPodcat_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[PodcatRequest, PodcatResponse]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PodcatService_ClientStreamingPodcatClient = grpc.ClientStreamingClient[PodcatRequest, PodcatResponse]
+
+func (c *podcatServiceClient) BidirectionalStreamingPodcat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[PodcatRequest, PodcatResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &PodcatService_ServiceDesc.Streams[2], PodcatService_BidirectionalStreamingPodcat_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[PodcatRequest, PodcatResponse]{ClientStream: stream}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PodcatService_BidirectionalStreamingPodcatClient = grpc.BidiStreamingClient[PodcatRequest, PodcatResponse]
+
+// PodcatServiceServer is the server API for PodcatService service.
+// All implementations must embed UnimplementedPodcatServiceServer
+// for forward compatibility.
+//
+// ================= Service Definition =================
+type PodcatServiceServer interface {
+	// Create new podcast
+	CreatePodcast(context.Context, *PodcatRequest) (*PodcatResponse, error)
+	// Get podcast by title
+	GetPodcatByTitle(context.Context, *GetByTitleRequest) (*PodcatResponse, error)
+	// Fetch authors from external API
+	ListAuthors(context.Context, *ListAuthorsRequest) (*ListAuthorsResponse, error)
+	// Streaming examples
+	UnaryPodcast(context.Context, *PodcatRequest) (*PodcatResponse, error)
+	ServerStreamingPodcat(*PodcatRequest, grpc.ServerStreamingServer[PodcatResponse]) error
+	ClientStreamingPodcat(grpc.ClientStreamingServer[PodcatRequest, PodcatResponse]) error
+	BidirectionalStreamingPodcat(grpc.BidiStreamingServer[PodcatRequest, PodcatResponse]) error
+	mustEmbedUnimplementedPodcatServiceServer()
+}
+
+// UnimplementedPodcatServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedPodcastServiceServer struct{}
+type UnimplementedPodcatServiceServer struct{}
 
-func (UnimplementedPodcastServiceServer) SayHello(context.Context, *PodcastServiceRequest) (*PodcastServiceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SayHello not implemented")
+func (UnimplementedPodcatServiceServer) CreatePodcast(context.Context, *PodcatRequest) (*PodcatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePodcast not implemented")
 }
-func (UnimplementedPodcastServiceServer) mustEmbedUnimplementedPodcastServiceServer() {}
-func (UnimplementedPodcastServiceServer) testEmbeddedByValue()                        {}
+func (UnimplementedPodcatServiceServer) GetPodcatByTitle(context.Context, *GetByTitleRequest) (*PodcatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPodcatByTitle not implemented")
+}
+func (UnimplementedPodcatServiceServer) ListAuthors(context.Context, *ListAuthorsRequest) (*ListAuthorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAuthors not implemented")
+}
+func (UnimplementedPodcatServiceServer) UnaryPodcast(context.Context, *PodcatRequest) (*PodcatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnaryPodcast not implemented")
+}
+func (UnimplementedPodcatServiceServer) ServerStreamingPodcat(*PodcatRequest, grpc.ServerStreamingServer[PodcatResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method ServerStreamingPodcat not implemented")
+}
+func (UnimplementedPodcatServiceServer) ClientStreamingPodcat(grpc.ClientStreamingServer[PodcatRequest, PodcatResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method ClientStreamingPodcat not implemented")
+}
+func (UnimplementedPodcatServiceServer) BidirectionalStreamingPodcat(grpc.BidiStreamingServer[PodcatRequest, PodcatResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method BidirectionalStreamingPodcat not implemented")
+}
+func (UnimplementedPodcatServiceServer) mustEmbedUnimplementedPodcatServiceServer() {}
+func (UnimplementedPodcatServiceServer) testEmbeddedByValue()                       {}
 
-// UnsafePodcastServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PodcastServiceServer will
+// UnsafePodcatServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PodcatServiceServer will
 // result in compilation errors.
-type UnsafePodcastServiceServer interface {
-	mustEmbedUnimplementedPodcastServiceServer()
+type UnsafePodcatServiceServer interface {
+	mustEmbedUnimplementedPodcatServiceServer()
 }
 
-func RegisterPodcastServiceServer(s grpc.ServiceRegistrar, srv PodcastServiceServer) {
-	// If the following call pancis, it indicates UnimplementedPodcastServiceServer was
+func RegisterPodcatServiceServer(s grpc.ServiceRegistrar, srv PodcatServiceServer) {
+	// If the following call pancis, it indicates UnimplementedPodcatServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&PodcastService_ServiceDesc, srv)
+	s.RegisterService(&PodcatService_ServiceDesc, srv)
 }
 
-func _PodcastService_SayHello_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(PodcastServiceRequest)
+func _PodcatService_CreatePodcast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PodcatRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PodcastServiceServer).SayHello(ctx, in)
+		return srv.(PodcatServiceServer).CreatePodcast(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PodcastService_SayHello_FullMethodName,
+		FullMethod: PodcatService_CreatePodcast_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PodcastServiceServer).SayHello(ctx, req.(*PodcastServiceRequest))
+		return srv.(PodcatServiceServer).CreatePodcast(ctx, req.(*PodcatRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// PodcastService_ServiceDesc is the grpc.ServiceDesc for PodcastService service.
+func _PodcatService_GetPodcatByTitle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetByTitleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PodcatServiceServer).GetPodcatByTitle(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PodcatService_GetPodcatByTitle_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PodcatServiceServer).GetPodcatByTitle(ctx, req.(*GetByTitleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PodcatService_ListAuthors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAuthorsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PodcatServiceServer).ListAuthors(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PodcatService_ListAuthors_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PodcatServiceServer).ListAuthors(ctx, req.(*ListAuthorsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PodcatService_UnaryPodcast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PodcatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PodcatServiceServer).UnaryPodcast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PodcatService_UnaryPodcast_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PodcatServiceServer).UnaryPodcast(ctx, req.(*PodcatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PodcatService_ServerStreamingPodcat_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(PodcatRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PodcatServiceServer).ServerStreamingPodcat(m, &grpc.GenericServerStream[PodcatRequest, PodcatResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PodcatService_ServerStreamingPodcatServer = grpc.ServerStreamingServer[PodcatResponse]
+
+func _PodcatService_ClientStreamingPodcat_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(PodcatServiceServer).ClientStreamingPodcat(&grpc.GenericServerStream[PodcatRequest, PodcatResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PodcatService_ClientStreamingPodcatServer = grpc.ClientStreamingServer[PodcatRequest, PodcatResponse]
+
+func _PodcatService_BidirectionalStreamingPodcat_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(PodcatServiceServer).BidirectionalStreamingPodcat(&grpc.GenericServerStream[PodcatRequest, PodcatResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type PodcatService_BidirectionalStreamingPodcatServer = grpc.BidiStreamingServer[PodcatRequest, PodcatResponse]
+
+// PodcatService_ServiceDesc is the grpc.ServiceDesc for PodcatService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PodcastService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "podcast.v1.PodcastService",
-	HandlerType: (*PodcastServiceServer)(nil),
+var PodcatService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "podcat.v2.PodcatService",
+	HandlerType: (*PodcatServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SayHello",
-			Handler:    _PodcastService_SayHello_Handler,
+			MethodName: "CreatePodcast",
+			Handler:    _PodcatService_CreatePodcast_Handler,
+		},
+		{
+			MethodName: "GetPodcatByTitle",
+			Handler:    _PodcatService_GetPodcatByTitle_Handler,
+		},
+		{
+			MethodName: "ListAuthors",
+			Handler:    _PodcatService_ListAuthors_Handler,
+		},
+		{
+			MethodName: "UnaryPodcast",
+			Handler:    _PodcatService_UnaryPodcast_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ServerStreamingPodcat",
+			Handler:       _PodcatService_ServerStreamingPodcat_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ClientStreamingPodcat",
+			Handler:       _PodcatService_ClientStreamingPodcat_Handler,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "BidirectionalStreamingPodcat",
+			Handler:       _PodcatService_BidirectionalStreamingPodcat_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "podcast/v2/podcast.proto",
 }

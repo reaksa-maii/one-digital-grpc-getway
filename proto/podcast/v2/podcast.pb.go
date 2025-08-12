@@ -4,9 +4,10 @@
 // 	protoc        (unknown)
 // source: podcast/v2/podcast.proto
 
-package podcast
+package podcatv2
 
 import (
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -21,27 +22,33 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type PodcastServiceRequest struct {
+// ================= Podcast Messages =================
+type PodcatRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	PodcatSize    string                 `protobuf:"bytes,2,opt,name=podcat_size,json=podcatSize,proto3" json:"podcat_size,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Category      string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Duration      float64                `protobuf:"fixed64,6,opt,name=duration,proto3" json:"duration,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PodcastServiceRequest) Reset() {
-	*x = PodcastServiceRequest{}
+func (x *PodcatRequest) Reset() {
+	*x = PodcatRequest{}
 	mi := &file_podcast_v2_podcast_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PodcastServiceRequest) String() string {
+func (x *PodcatRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PodcastServiceRequest) ProtoMessage() {}
+func (*PodcatRequest) ProtoMessage() {}
 
-func (x *PodcastServiceRequest) ProtoReflect() protoreflect.Message {
+func (x *PodcatRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_podcast_v2_podcast_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -53,40 +60,370 @@ func (x *PodcastServiceRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PodcastServiceRequest.ProtoReflect.Descriptor instead.
-func (*PodcastServiceRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use PodcatRequest.ProtoReflect.Descriptor instead.
+func (*PodcatRequest) Descriptor() ([]byte, []int) {
 	return file_podcast_v2_podcast_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *PodcastServiceRequest) GetName() string {
+func (x *PodcatRequest) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *PodcatRequest) GetPodcatSize() string {
+	if x != nil {
+		return x.PodcatSize
+	}
+	return ""
+}
+
+func (x *PodcatRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *PodcatRequest) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *PodcatRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *PodcatRequest) GetDuration() float64 {
+	if x != nil {
+		return x.Duration
+	}
+	return 0
+}
+
+type PodcatResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	PodcatSize    string                 `protobuf:"bytes,2,opt,name=podcat_size,json=podcatSize,proto3" json:"podcat_size,omitempty"`
+	Title         string                 `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Category      string                 `protobuf:"bytes,4,opt,name=category,proto3" json:"category,omitempty"`
+	Description   string                 `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
+	Duration      float64                `protobuf:"fixed64,6,opt,name=duration,proto3" json:"duration,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PodcatResponse) Reset() {
+	*x = PodcatResponse{}
+	mi := &file_podcast_v2_podcast_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PodcatResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PodcatResponse) ProtoMessage() {}
+
+func (x *PodcatResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_podcast_v2_podcast_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PodcatResponse.ProtoReflect.Descriptor instead.
+func (*PodcatResponse) Descriptor() ([]byte, []int) {
+	return file_podcast_v2_podcast_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *PodcatResponse) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *PodcatResponse) GetPodcatSize() string {
+	if x != nil {
+		return x.PodcatSize
+	}
+	return ""
+}
+
+func (x *PodcatResponse) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *PodcatResponse) GetCategory() string {
+	if x != nil {
+		return x.Category
+	}
+	return ""
+}
+
+func (x *PodcatResponse) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *PodcatResponse) GetDuration() float64 {
+	if x != nil {
+		return x.Duration
+	}
+	return 0
+}
+
+type GetByTitleRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Title         string                 `protobuf:"bytes,1,opt,name=title,proto3" json:"title,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetByTitleRequest) Reset() {
+	*x = GetByTitleRequest{}
+	mi := &file_podcast_v2_podcast_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetByTitleRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetByTitleRequest) ProtoMessage() {}
+
+func (x *GetByTitleRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_podcast_v2_podcast_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetByTitleRequest.ProtoReflect.Descriptor instead.
+func (*GetByTitleRequest) Descriptor() ([]byte, []int) {
+	return file_podcast_v2_podcast_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetByTitleRequest) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+// ================= Author Messages =================
+// Request for listing authors
+type ListAuthorsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`                         // Page number
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"` // Number of items per page
+	Locale        string                 `protobuf:"bytes,3,opt,name=locale,proto3" json:"locale,omitempty"`                      // Optional: filter by locale (e.g., "en", "km")
+	Search        string                 `protobuf:"bytes,4,opt,name=search,proto3" json:"search,omitempty"`                      // Optional: search by author name
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAuthorsRequest) Reset() {
+	*x = ListAuthorsRequest{}
+	mi := &file_podcast_v2_podcast_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAuthorsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAuthorsRequest) ProtoMessage() {}
+
+func (x *ListAuthorsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_podcast_v2_podcast_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAuthorsRequest.ProtoReflect.Descriptor instead.
+func (*ListAuthorsRequest) Descriptor() ([]byte, []int) {
+	return file_podcast_v2_podcast_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListAuthorsRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListAuthorsRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListAuthorsRequest) GetLocale() string {
+	if x != nil {
+		return x.Locale
+	}
+	return ""
+}
+
+func (x *ListAuthorsRequest) GetSearch() string {
+	if x != nil {
+		return x.Search
+	}
+	return ""
+}
+
+// Author data
+type Author struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            int32                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	CreatedAt     string                 `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     string                 `protobuf:"bytes,4,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Locale        string                 `protobuf:"bytes,5,opt,name=locale,proto3" json:"locale,omitempty"`
+	DocumentId    string                 `protobuf:"bytes,6,opt,name=document_id,json=documentId,proto3" json:"document_id,omitempty"`
+	PublishedAt   string                 `protobuf:"bytes,7,opt,name=published_at,json=publishedAt,proto3" json:"published_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Author) Reset() {
+	*x = Author{}
+	mi := &file_podcast_v2_podcast_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Author) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Author) ProtoMessage() {}
+
+func (x *Author) ProtoReflect() protoreflect.Message {
+	mi := &file_podcast_v2_podcast_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Author.ProtoReflect.Descriptor instead.
+func (*Author) Descriptor() ([]byte, []int) {
+	return file_podcast_v2_podcast_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *Author) GetId() int32 {
+	if x != nil {
+		return x.Id
+	}
+	return 0
+}
+
+func (x *Author) GetName() string {
 	if x != nil {
 		return x.Name
 	}
 	return ""
 }
 
-type PodcastServiceResponse struct {
+func (x *Author) GetCreatedAt() string {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return ""
+}
+
+func (x *Author) GetUpdatedAt() string {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return ""
+}
+
+func (x *Author) GetLocale() string {
+	if x != nil {
+		return x.Locale
+	}
+	return ""
+}
+
+func (x *Author) GetDocumentId() string {
+	if x != nil {
+		return x.DocumentId
+	}
+	return ""
+}
+
+func (x *Author) GetPublishedAt() string {
+	if x != nil {
+		return x.PublishedAt
+	}
+	return ""
+}
+
+// Pagination meta info
+type Pagination struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	PageCount     int32                  `protobuf:"varint,3,opt,name=page_count,json=pageCount,proto3" json:"page_count,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *PodcastServiceResponse) Reset() {
-	*x = PodcastServiceResponse{}
-	mi := &file_podcast_v2_podcast_proto_msgTypes[1]
+func (x *Pagination) Reset() {
+	*x = Pagination{}
+	mi := &file_podcast_v2_podcast_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *PodcastServiceResponse) String() string {
+func (x *Pagination) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*PodcastServiceResponse) ProtoMessage() {}
+func (*Pagination) ProtoMessage() {}
 
-func (x *PodcastServiceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_podcast_v2_podcast_proto_msgTypes[1]
+func (x *Pagination) ProtoReflect() protoreflect.Message {
+	mi := &file_podcast_v2_podcast_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -97,30 +434,152 @@ func (x *PodcastServiceResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use PodcastServiceResponse.ProtoReflect.Descriptor instead.
-func (*PodcastServiceResponse) Descriptor() ([]byte, []int) {
-	return file_podcast_v2_podcast_proto_rawDescGZIP(), []int{1}
+// Deprecated: Use Pagination.ProtoReflect.Descriptor instead.
+func (*Pagination) Descriptor() ([]byte, []int) {
+	return file_podcast_v2_podcast_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *PodcastServiceResponse) GetMessage() string {
+func (x *Pagination) GetPage() int32 {
 	if x != nil {
-		return x.Message
+		return x.Page
 	}
-	return ""
+	return 0
+}
+
+func (x *Pagination) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *Pagination) GetPageCount() int32 {
+	if x != nil {
+		return x.PageCount
+	}
+	return 0
+}
+
+func (x *Pagination) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+// Response for listing authors
+type ListAuthorsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          []*Author              `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty"`
+	Pagination    *Pagination            `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListAuthorsResponse) Reset() {
+	*x = ListAuthorsResponse{}
+	mi := &file_podcast_v2_podcast_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAuthorsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAuthorsResponse) ProtoMessage() {}
+
+func (x *ListAuthorsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_podcast_v2_podcast_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAuthorsResponse.ProtoReflect.Descriptor instead.
+func (*ListAuthorsResponse) Descriptor() ([]byte, []int) {
+	return file_podcast_v2_podcast_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListAuthorsResponse) GetData() []*Author {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
+func (x *ListAuthorsResponse) GetPagination() *Pagination {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
 }
 
 var File_podcast_v2_podcast_proto protoreflect.FileDescriptor
 
 const file_podcast_v2_podcast_proto_rawDesc = "" +
 	"\n" +
-	"\x18podcast/v2/podcast.proto\x12\n" +
-	"podcast.v1\"+\n" +
-	"\x15PodcastServiceRequest\x12\x12\n" +
-	"\x04name\x18\x01 \x01(\tR\x04name\"2\n" +
-	"\x16PodcastServiceResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2e\n" +
-	"\x0ePodcastService\x12S\n" +
-	"\bSayHello\x12!.podcast.v1.PodcastServiceRequest\x1a\".podcast.v1.PodcastServiceResponse\"\x00B8Z6github.com/reaksa-maii/one_digital_grpc_getway/podcastb\x06proto3"
+	"\x18podcast/v2/podcast.proto\x12\tpodcat.v2\x1a\x1cgoogle/api/annotations.proto\"\xb0\x01\n" +
+	"\rPodcatRequest\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1f\n" +
+	"\vpodcat_size\x18\x02 \x01(\tR\n" +
+	"podcatSize\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
+	"\bduration\x18\x06 \x01(\x01R\bduration\"\xb1\x01\n" +
+	"\x0ePodcatResponse\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x1f\n" +
+	"\vpodcat_size\x18\x02 \x01(\tR\n" +
+	"podcatSize\x12\x14\n" +
+	"\x05title\x18\x03 \x01(\tR\x05title\x12\x1a\n" +
+	"\bcategory\x18\x04 \x01(\tR\bcategory\x12 \n" +
+	"\vdescription\x18\x05 \x01(\tR\vdescription\x12\x1a\n" +
+	"\bduration\x18\x06 \x01(\x01R\bduration\")\n" +
+	"\x11GetByTitleRequest\x12\x14\n" +
+	"\x05title\x18\x01 \x01(\tR\x05title\"u\n" +
+	"\x12ListAuthorsRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x16\n" +
+	"\x06locale\x18\x03 \x01(\tR\x06locale\x12\x16\n" +
+	"\x06search\x18\x04 \x01(\tR\x06search\"\xc6\x01\n" +
+	"\x06Author\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\x05R\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x1d\n" +
+	"\n" +
+	"created_at\x18\x03 \x01(\tR\tcreatedAt\x12\x1d\n" +
+	"\n" +
+	"updated_at\x18\x04 \x01(\tR\tupdatedAt\x12\x16\n" +
+	"\x06locale\x18\x05 \x01(\tR\x06locale\x12\x1f\n" +
+	"\vdocument_id\x18\x06 \x01(\tR\n" +
+	"documentId\x12!\n" +
+	"\fpublished_at\x18\a \x01(\tR\vpublishedAt\"r\n" +
+	"\n" +
+	"Pagination\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12\x1d\n" +
+	"\n" +
+	"page_count\x18\x03 \x01(\x05R\tpageCount\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"s\n" +
+	"\x13ListAuthorsResponse\x12%\n" +
+	"\x04data\x18\x01 \x03(\v2\x11.podcat.v2.AuthorR\x04data\x125\n" +
+	"\n" +
+	"pagination\x18\x02 \x01(\v2\x15.podcat.v2.PaginationR\n" +
+	"pagination2\xfe\x04\n" +
+	"\rPodcatService\x12[\n" +
+	"\rCreatePodcast\x12\x18.podcat.v2.PodcatRequest\x1a\x19.podcat.v2.PodcatResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/v2/podcat\x12g\n" +
+	"\x10GetPodcatByTitle\x12\x1c.podcat.v2.GetByTitleRequest\x1a\x19.podcat.v2.PodcatResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/v2/podcat/{title}\x12a\n" +
+	"\vListAuthors\x12\x1d.podcat.v2.ListAuthorsRequest\x1a\x1e.podcat.v2.ListAuthorsResponse\"\x13\x82\xd3\xe4\x93\x02\r\x12\v/v2/authors\x12E\n" +
+	"\fUnaryPodcast\x12\x18.podcat.v2.PodcatRequest\x1a\x19.podcat.v2.PodcatResponse\"\x00\x12P\n" +
+	"\x15ServerStreamingPodcat\x12\x18.podcat.v2.PodcatRequest\x1a\x19.podcat.v2.PodcatResponse\"\x000\x01\x12P\n" +
+	"\x15ClientStreamingPodcat\x12\x18.podcat.v2.PodcatRequest\x1a\x19.podcat.v2.PodcatResponse\"\x00(\x01\x12Y\n" +
+	"\x1cBidirectionalStreamingPodcat\x12\x18.podcat.v2.PodcatRequest\x1a\x19.podcat.v2.PodcatResponse\"\x00(\x010\x01B@Z>github.com/reaksa-maii/one_digital_grpc_getway/podcat;podcatv2b\x06proto3"
 
 var (
 	file_podcast_v2_podcast_proto_rawDescOnce sync.Once
@@ -134,19 +593,38 @@ func file_podcast_v2_podcast_proto_rawDescGZIP() []byte {
 	return file_podcast_v2_podcast_proto_rawDescData
 }
 
-var file_podcast_v2_podcast_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_podcast_v2_podcast_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_podcast_v2_podcast_proto_goTypes = []any{
-	(*PodcastServiceRequest)(nil),  // 0: podcast.v1.PodcastServiceRequest
-	(*PodcastServiceResponse)(nil), // 1: podcast.v1.PodcastServiceResponse
+	(*PodcatRequest)(nil),       // 0: podcat.v2.PodcatRequest
+	(*PodcatResponse)(nil),      // 1: podcat.v2.PodcatResponse
+	(*GetByTitleRequest)(nil),   // 2: podcat.v2.GetByTitleRequest
+	(*ListAuthorsRequest)(nil),  // 3: podcat.v2.ListAuthorsRequest
+	(*Author)(nil),              // 4: podcat.v2.Author
+	(*Pagination)(nil),          // 5: podcat.v2.Pagination
+	(*ListAuthorsResponse)(nil), // 6: podcat.v2.ListAuthorsResponse
 }
 var file_podcast_v2_podcast_proto_depIdxs = []int32{
-	0, // 0: podcast.v1.PodcastService.SayHello:input_type -> podcast.v1.PodcastServiceRequest
-	1, // 1: podcast.v1.PodcastService.SayHello:output_type -> podcast.v1.PodcastServiceResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	4, // 0: podcat.v2.ListAuthorsResponse.data:type_name -> podcat.v2.Author
+	5, // 1: podcat.v2.ListAuthorsResponse.pagination:type_name -> podcat.v2.Pagination
+	0, // 2: podcat.v2.PodcatService.CreatePodcast:input_type -> podcat.v2.PodcatRequest
+	2, // 3: podcat.v2.PodcatService.GetPodcatByTitle:input_type -> podcat.v2.GetByTitleRequest
+	3, // 4: podcat.v2.PodcatService.ListAuthors:input_type -> podcat.v2.ListAuthorsRequest
+	0, // 5: podcat.v2.PodcatService.UnaryPodcast:input_type -> podcat.v2.PodcatRequest
+	0, // 6: podcat.v2.PodcatService.ServerStreamingPodcat:input_type -> podcat.v2.PodcatRequest
+	0, // 7: podcat.v2.PodcatService.ClientStreamingPodcat:input_type -> podcat.v2.PodcatRequest
+	0, // 8: podcat.v2.PodcatService.BidirectionalStreamingPodcat:input_type -> podcat.v2.PodcatRequest
+	1, // 9: podcat.v2.PodcatService.CreatePodcast:output_type -> podcat.v2.PodcatResponse
+	1, // 10: podcat.v2.PodcatService.GetPodcatByTitle:output_type -> podcat.v2.PodcatResponse
+	6, // 11: podcat.v2.PodcatService.ListAuthors:output_type -> podcat.v2.ListAuthorsResponse
+	1, // 12: podcat.v2.PodcatService.UnaryPodcast:output_type -> podcat.v2.PodcatResponse
+	1, // 13: podcat.v2.PodcatService.ServerStreamingPodcat:output_type -> podcat.v2.PodcatResponse
+	1, // 14: podcat.v2.PodcatService.ClientStreamingPodcat:output_type -> podcat.v2.PodcatResponse
+	1, // 15: podcat.v2.PodcatService.BidirectionalStreamingPodcat:output_type -> podcat.v2.PodcatResponse
+	9, // [9:16] is the sub-list for method output_type
+	2, // [2:9] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_podcast_v2_podcast_proto_init() }
@@ -160,7 +638,7 @@ func file_podcast_v2_podcast_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_podcast_v2_podcast_proto_rawDesc), len(file_podcast_v2_podcast_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

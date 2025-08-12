@@ -7,14 +7,13 @@ import (
 	"log"
 	"net"
 
-	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/podcast/v1"
-	podcatv1 "github.com/reaksa-maii/one_digital_grpc_getway/proto/podcast/v1"
+	pb "github.com/reaksa-maii/one_digital_grpc_getway/proto/podcast/v2"
+	podcatv1 "github.com/reaksa-maii/one_digital_grpc_getway/proto/podcast/v2"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc/status"
 )
-
 
 type server struct {
 	pb.UnimplementedPodcatServiceServer

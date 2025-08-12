@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package podcast.v3;
+
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/podcast;podcastv3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+message Author {
+  string id = 1;
+  string name = 2;
+  string locale = 3;
+  string documentId = 4;
+  google.protobuf.Timestamp createdAt = 5;
+  google.protobuf.Timestamp updatedAt = 6;
+  google.protobuf.Timestamp publishedAt = 7;
+}
+
+message ListAuthorsRequest {
+  // add pagination fields if needed
+  int32 limit = 1;
+  int32 offset = 2;
+}
+
+message ListAuthorsResponse {
+  repeated Author authors = 1;
+}
+
+message GetAuthorRequest {
+  string id = 1;
+}
+
+message CreateAuthorRequest {
+  string name = 1;
+  string locale = 2;
+  string documentId = 3;
+  // other fields as needed
+}
+
+service AuthorService {
+  // gRPC methods
+  rpc ListAuthors (ListAuthorsRequest) returns (ListAuthorsResponse) {
+    option (google.api.http) = {
+      get: "/v3/authors"
+    };
+  }
+
+  rpc GetAuthor (GetAuthorRequest) returns (Author) {
+    option (google.api.http) = {
+      get: "/v3/authors/{id}"
+    };
+  }
+
+  rpc CreateAuthor (CreateAuthorRequest) returns (Author) {
+    option (google.api.http) = {
+      post: "/v3/authors"
+      body: "*"
+    };
+  }
+}
