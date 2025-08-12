@@ -1,17 +1,95 @@
 syntax = "proto3";
 
-package podcast.v1;
+import "google/api/annotations.proto";
 
-option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/podcast";
+option go_package = "github.com/reaksa-maii/one_digital_grpc_getway/podcat;podcatv2";
 
-service PodcastService {
-  rpc SayHello(PodcastServiceRequest) returns (PodcastServiceResponse){}
+package podcat.v2;
+
+// ================= Service Definition =================
+service PodcatService {
+    // Create new podcast
+	rpc CreatePodcast (PodcatRequest) returns (PodcatResponse) {
+		option (google.api.http) = {
+      		post: "/v2/podcat"
+      		body: "*"
+		};
+	}
+
+    // Get podcast by title
+	rpc GetPodcatByTitle (GetByTitleRequest) returns (PodcatResponse) {
+		option (google.api.http) = {
+      		get: "/v2/podcat/{title}"
+		};
+	}
+
+	// Fetch authors from external API
+	rpc ListAuthors (ListAuthorsRequest) returns (ListAuthorsResponse) {
+		option (google.api.http) = {
+      		get: "/v2/authors"
+		};
+	}
+
+    // Streaming examples
+    rpc UnaryPodcast(PodcatRequest) returns (PodcatResponse) {}
+    rpc ServerStreamingPodcat(PodcatRequest) returns (stream PodcatResponse) {}
+    rpc ClientStreamingPodcat(stream PodcatRequest) returns (PodcatResponse) {}
+    rpc BidirectionalStreamingPodcat(stream PodcatRequest) returns (stream PodcatResponse) {}
 }
 
-message PodcastServiceRequest {
-  string name = 1;
+// ================= Podcast Messages =================
+message PodcatRequest {
+    int32 id = 1;
+	string podcat_size = 2;
+    string title = 3;
+    string category = 4;
+    string description = 5;
+    double duration = 6;
 }
 
-message PodcastServiceResponse {
-  string message = 1;
+message PodcatResponse {
+    int32 id = 1;
+	string podcat_size = 2;
+    string title = 3;
+    string category = 4;
+    string description = 5;
+    double duration = 6;
+}
+
+message GetByTitleRequest {
+  string title = 1;
+}
+
+// ================= Author Messages =================
+// Request for listing authors
+message ListAuthorsRequest {
+	int32 page = 1;       // Page number
+	int32 page_size = 2;  // Number of items per page
+	string locale = 3;    // Optional: filter by locale (e.g., "en", "km")
+	string search = 4;    // Optional: search by author name
+}
+
+// Author data
+message Author {
+	int32 id = 1;
+	string name = 2;
+	string created_at = 3;
+	string updated_at = 4;
+	string locale = 5;
+	string document_id = 6;
+	string published_at = 7;
+}
+
+// Pagination meta info
+message Pagination {
+	int32 page = 1;
+	int32 page_size = 2;
+	int32 page_count = 3;
+	int32 total = 4;
+}
+
+// Response for listing authors
+message ListAuthorsResponse {
+	repeated Author data = 1;
+	Pagination pagination = 2;
 }
